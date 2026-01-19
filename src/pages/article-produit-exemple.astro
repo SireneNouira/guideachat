@@ -1,0 +1,357 @@
+---
+/**
+ * TEMPLATE D'ARTICLE PRODUIT AFFILIÉ
+ * 
+ * Ce template est optimisé pour:
+ * - Le SEO (H1 unique, structure sémantique, meta descriptions)
+ * - La conversion (CTA visibles, avantages/inconvénients, avis)
+ * - L'expérience utilisateur (responsive, lisibilité)
+ * 
+ * À personnaliser pour chaque produit
+ */
+
+import Layout from '../layouts/Layout.astro';
+import AffiliateButton from '../components/AffiliateButton.astro';
+import AffiliateBox from '../components/AffiliateBox.astro';
+import ProsConsBox from '../components/ProsConsBox.astro';
+import ProductSpecs from '../components/ProductSpecs.astro';
+import StarRating from '../components/StarRating.astro';
+
+// ===== CONFIGURATION DU PRODUIT =====
+const productData = {
+  // Informations de base
+  name: "Exemple Produit Premium XYZ",
+  category: "Électronique",
+  brand: "MarqueXYZ",
+  
+  // SEO
+  metaTitle: "Test & Avis Produit Premium XYZ 2026 - Notre Verdict Complet",
+  metaDescription: "Découvrez notre test complet du Produit Premium XYZ : caractéristiques, avantages, inconvénients, prix et où l'acheter au meilleur tarif. Avis honnête après 3 mois d'utilisation.",
+  
+  // Prix et lien affilié
+  price: "299€",
+  originalPrice: "399€",
+  affiliateLink: "https://votre-lien-affilie.com/produit-xyz",
+  
+  // Images
+  mainImage: "/images/products/produit-xyz-main.jpg",
+  galleryImages: [
+    "/images/products/produit-xyz-1.jpg",
+    "/images/products/produit-xyz-2.jpg",
+    "/images/products/produit-xyz-3.jpg"
+  ],
+  
+  // Note
+  rating: 4.5,
+  
+  // Avantages
+  pros: [
+    "Excellente qualité de fabrication",
+    "Rapport qualité-prix imbattable",
+    "Facile à utiliser, même pour les débutants",
+    "Design moderne et élégant",
+    "Garantie 2 ans incluse",
+    "Service client réactif"
+  ],
+  
+  // Inconvénients
+  cons: [
+    "Poids un peu élevé (1.2kg)",
+    "Notice en anglais uniquement",
+    "Pas de housse de transport incluse"
+  ],
+  
+  // Caractéristiques techniques
+  specs: [
+    { label: "Marque", value: "MarqueXYZ" },
+    { label: "Modèle", value: "Premium XYZ 2026" },
+    { label: "Dimensions", value: "30 x 20 x 10 cm" },
+    { label: "Poids", value: "1.2 kg" },
+    { label: "Couleurs disponibles", value: "Noir, Blanc, Gris" },
+    { label: "Garantie", value: "2 ans" },
+    { label: "Pays de fabrication", value: "Allemagne" }
+  ]
+};
+
+const publishDate = "15 janvier 2026";
+const updateDate = "19 janvier 2026";
+---
+
+<Layout 
+  title={productData.metaTitle} 
+  description={productData.metaDescription}
+  image={productData.mainImage}
+>
+  <article class="product-article">
+    <!-- En-tête de l'article -->
+    <div class="article-header container">
+      <div class="breadcrumb">
+        <a href="/">Accueil</a> » 
+        <a href="/articles">Articles</a> » 
+        <a href={`/categories/${productData.category.toLowerCase()}`}>{productData.category}</a> »
+        <span>{productData.name}</span>
+      </div>
+      
+      <!-- H1 Unique - Crucial pour le SEO -->
+      <h1 class="article-title">
+        Test & Avis {productData.name} ({new Date().getFullYear()}) : Notre Verdict Complet
+      </h1>
+      
+      <div class="article-meta">
+        <span class="meta-item">📅 Publié le {publishDate}</span>
+        <span class="meta-item">🔄 Mis à jour le {updateDate}</span>
+        <span class="meta-item">⏱️ Lecture : 8 min</span>
+      </div>
+      
+      <!-- Note globale -->
+      <div class="rating-section">
+        <StarRating rating={productData.rating} size="large" />
+        <span class="rating-text">Excellent produit</span>
+      </div>
+    </div>
+
+    <!-- Encart principal d'affiliation -->
+    <div class="container">
+      <AffiliateBox 
+        title="🏆 Meilleur rapport qualité-prix"
+        productName={productData.name}
+        price={productData.price}
+        image={productData.mainImage}
+        affiliateLink={productData.affiliateLink}
+        badge="TOP CHOIX 2026"
+        features={[
+          "Livraison gratuite",
+          "Retour sous 30 jours",
+          "Garantie 2 ans"
+        ]}
+      />
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="article-content container content-wrapper">
+      
+      <!-- Introduction SEO-friendly -->
+      <section class="intro-section">
+        <p class="lead">
+          Vous cherchez un produit fiable et performant dans la catégorie {productData.category} ? 
+          Nous avons testé pendant <strong>3 mois</strong> le <strong>{productData.name}</strong> 
+          pour vous donner un avis complet et honnête.
+        </p>
+        <p>
+          Dans cet article, vous découvrirez tout ce qu'il faut savoir sur ce produit : 
+          ses caractéristiques techniques, ses points forts et faibles, notre expérience d'utilisation, 
+          et surtout, s'il vaut vraiment son prix de {productData.price}.
+        </p>
+      </section>
+
+      <!-- Table des matières -->
+      <nav class="table-of-contents">
+        <h2>📋 Sommaire</h2>
+        <ol>
+          <li><a href="#presentation">Présentation du produit</a></li>
+          <li><a href="#caracteristiques">Caractéristiques techniques</a></li>
+          <li><a href="#test">Notre test complet</a></li>
+          <li><a href="#avantages-inconvenients">Avantages et inconvénients</a></li>
+          <li><a href="#avis">Notre avis final</a></li>
+          <li><a href="#ou-acheter">Où l'acheter au meilleur prix ?</a></li>
+        </ol>
+      </nav>
+
+      <!-- Section 1: Présentation -->
+      <section id="presentation">
+        <h2>🎯 Présentation du {productData.name}</h2>
+        <p>
+          Le <strong>{productData.name}</strong> de la marque {productData.brand} est un produit 
+          qui s'adresse à tous ceux qui recherchent qualité et performance dans la catégorie {productData.category}.
+        </p>
+        <p>
+          Lancé en {new Date().getFullYear()}, ce modèle représente l'évolution de la gamme avec 
+          des améliorations significatives par rapport à la version précédente.
+        </p>
+        
+        <!-- CTA intermédiaire -->
+        <div class="cta-inline">
+          <AffiliateButton 
+            href={productData.affiliateLink}
+            text="👉 Voir le prix actuel"
+            variant="accent"
+            size="large"
+            track={productData.name}
+          />
+        </div>
+      </section>
+
+      <!-- Section 2: Caractéristiques -->
+      <section id="caracteristiques">
+        <h2>📊 Caractéristiques techniques</h2>
+        <p>
+          Voici un récapitulatif complet des spécifications techniques du {productData.name} :
+        </p>
+        <ProductSpecs specs={productData.specs} />
+      </section>
+
+      <!-- Section 3: Test complet -->
+      <section id="test">
+        <h2>🔍 Notre test complet</h2>
+        
+        <h3>Unboxing et première impression</h3>
+        <p>
+          Dès l'ouverture de la boîte, on est impressionné par la qualité de l'emballage. 
+          Le produit est bien protégé et tous les accessoires sont inclus. La notice d'utilisation 
+          est claire (bien qu'en anglais uniquement, ce qui peut être un frein pour certains).
+        </p>
+
+        <h3>Qualité de fabrication</h3>
+        <p>
+          Les matériaux utilisés sont de très bonne qualité. On sent que le produit est conçu 
+          pour durer. Le design est moderne et s'intègre parfaitement dans n'importe quel intérieur.
+        </p>
+
+        <h3>Performance au quotidien</h3>
+        <p>
+          Après 3 mois d'utilisation intensive, le {productData.name} tient toutes ses promesses. 
+          Les performances sont au rendez-vous et le produit ne montre aucun signe de faiblesse.
+        </p>
+
+        <h3>Facilité d'utilisation</h3>
+        <p>
+          L'ergonomie est excellente. Même sans lire la notice, on comprend rapidement comment 
+          utiliser le produit. C'est un point très positif pour les personnes moins à l'aise avec la technologie.
+        </p>
+      </section>
+
+      <!-- Section 4: Avantages/Inconvénients -->
+      <section id="avantages-inconvenients">
+        <h2>⚖️ Avantages et inconvénients</h2>
+        <p>
+          Après notre période de test, voici un résumé objectif des points forts et faibles du {productData.name} :
+        </p>
+        <ProsConsBox 
+          pros={productData.pros}
+          cons={productData.cons}
+        />
+      </section>
+
+      <!-- Section 5: Avis final -->
+      <section id="avis">
+        <h2>💭 Notre avis final</h2>
+        <div class="final-rating">
+          <StarRating rating={productData.rating} size="large" />
+        </div>
+        <p>
+          Le <strong>{productData.name}</strong> mérite amplement sa note de {productData.rating}/5. 
+          C'est un produit que nous recommandons sans hésitation pour son excellent rapport qualité-prix.
+        </p>
+        <p>
+          Malgré quelques petits défauts (poids, notice en anglais), les qualités de ce produit 
+          l'emportent largement. Pour un prix de {productData.price}, vous obtenez un produit 
+          fiable, performant et garanti 2 ans.
+        </p>
+        
+        <div class="recommendation-box">
+          <h3>👍 À qui s'adresse ce produit ?</h3>
+          <ul>
+            <li>✅ Aux personnes recherchant un bon rapport qualité-prix</li>
+            <li>✅ Aux débutants comme aux utilisateurs expérimentés</li>
+            <li>✅ À ceux qui valorisent la qualité de fabrication</li>
+          </ul>
+          
+          <h3>👎 À qui ne convient-il pas ?</h3>
+          <ul>
+            <li>❌ Aux personnes cherchant un produit ultra-léger</li>
+            <li>❌ À ceux qui ont besoin d'une notice en français</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Section 6: Où acheter -->
+      <section id="ou-acheter">
+        <h2>🛒 Où acheter le {productData.name} au meilleur prix ?</h2>
+        <p>
+          Après avoir comparé les prix sur plusieurs sites, nous vous recommandons cette offre 
+          qui propose le meilleur tarif du moment :
+        </p>
+        
+        <div class="price-comparison">
+          <div class="price-box best-price">
+            <div class="price-header">
+              <span class="badge badge-success">MEILLEUR PRIX</span>
+              <h4>Offre recommandée</h4>
+            </div>
+            <div class="price-info">
+              <span class="current-price">{productData.price}</span>
+              {productData.originalPrice && (
+                <span class="original-price">{productData.originalPrice}</span>
+              )}
+              <span class="discount">-25% de réduction</span>
+            </div>
+            <ul class="offer-benefits">
+              <li>✓ Livraison gratuite</li>
+              <li>✓ Retour sous 30 jours</li>
+              <li>✓ Garantie constructeur 2 ans</li>
+              <li>✓ Paiement sécurisé</li>
+            </ul>
+            <div class="price-cta">
+              <AffiliateButton 
+                href={productData.affiliateLink}
+                text="Voir l'offre maintenant"
+                variant="accent"
+                size="large"
+                track={productData.name}
+              />
+            </div>
+            <p class="affiliate-note">
+              <small>
+                ℹ️ En tant que Partenaire, nous pouvons percevoir une commission sur les achats 
+                effectués via ce lien, sans frais supplémentaires pour vous.
+              </small>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ SEO -->
+      <section class="faq-section">
+        <h2>❓ Questions fréquentes</h2>
+        
+        <div class="faq-item">
+          <h3>Le {productData.name} vaut-il son prix ?</h3>
+          <p>
+            Oui, avec son prix de {productData.price}, il offre un excellent rapport qualité-prix. 
+            La qualité de fabrication et les performances justifient pleinement l'investissement.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Quelle est la durée de la garantie ?</h3>
+          <p>
+            Le produit est garanti 2 ans par le constructeur, ce qui est au-dessus de la moyenne du marché.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Est-ce adapté aux débutants ?</h3>
+          <p>
+            Absolument ! Le {productData.name} est très facile à prendre en main, même pour les débutants.
+          </p>
+        </div>
+      </section>
+
+      <!-- CTA final -->
+      <section class="final-cta">
+        <div class="cta-box">
+          <h2>Prêt à vous lancer ?</h2>
+          <p>Profitez de l'offre actuelle avec -25% de réduction</p>
+          <AffiliateButton 
+            href={productData.affiliateLink}
+            text="🚀 Acheter maintenant au meilleur prix"
+            variant="accent"
+            size="large"
+            track={productData.name}
+          />
+        </div>
+      </section>
+
+    </div>
+  </article>
+</Layout>

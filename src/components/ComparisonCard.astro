@@ -1,0 +1,88 @@
+---
+/**
+ * Composant de comparaison de produits
+ * Utilisation dans un tableau comparatif
+ */
+interface Product {
+  name: string;
+  image: string;
+  rating: number;
+  price: string;
+  pros: string[];
+  cons: string[];
+  affiliateLink: string;
+  badge?: string;
+}
+
+interface Props {
+  product: Product;
+  rank?: number;
+}
+
+const { product, rank } = Astro.props;
+
+import AffiliateButton from './AffiliateButton.astro';
+import StarRating from './StarRating.astro';
+---
+
+<div class="comparison-card">
+  {rank && rank <= 3 && (
+    <div class="rank-badge rank-{rank}">
+      {rank === 1 && '🥇'}
+      {rank === 2 && '🥈'}
+      {rank === 3 && '🥉'}
+      N°{rank}
+    </div>
+  )}
+  
+  {product.badge && (
+    <span class="product-badge badge badge-success">{product.badge}</span>
+  )}
+  
+  <div class="card-image">
+    <img src={product.image} alt={product.name} loading="lazy" />
+  </div>
+  
+  <div class="card-content">
+    <h3 class="product-name">{product.name}</h3>
+    
+    <div class="rating-wrapper">
+      <StarRating rating={product.rating} size="small" />
+    </div>
+    
+    <div class="price-tag">
+      <span class="price">{product.price}</span>
+    </div>
+    
+    <div class="pros-cons-mini">
+      <div class="pros-mini">
+        <strong>✓ Points forts :</strong>
+        <ul>
+          {product.pros.slice(0, 3).map(pro => (
+            <li>{pro}</li>
+          ))}
+        </ul>
+      </div>
+      
+      {product.cons.length > 0 && (
+        <div class="cons-mini">
+          <strong>✗ Points faibles :</strong>
+          <ul>
+            {product.cons.slice(0, 2).map(con => (
+              <li>{con}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+    
+    <div class="card-cta">
+      <AffiliateButton 
+        href={product.affiliateLink}
+        text="Voir le prix"
+        variant={rank === 1 ? 'accent' : 'primary'}
+        track={product.name}
+      />
+    </div>
+  </div>
+</div>

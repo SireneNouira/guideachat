@@ -1,0 +1,230 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AffiliateButton from '../components/AffiliateButton.astro';
+
+const featuredArticles = [
+  {
+    title: "Test & Avis Produit Premium XYZ",
+    excerpt: "Notre test complet du produit le plus populaire de 2026",
+    image: "/images/products/produit-xyz-main.jpg",
+    category: "Électronique",
+    link: "/article-produit-exemple",
+    rating: 4.8
+  },
+  {
+    title: "Top 5 des Meilleurs Produits XYZ",
+    excerpt: "Comparatif complet pour faire le bon choix",
+    image: "/images/products/comparatif-hero.jpg",
+    category: "Comparatifs",
+    link: "/comparatif-exemple",
+    rating: 4.9
+  }
+];
+
+const categories = [
+  { name: "Électronique", icon: "💻", count: 25 },
+  { name: "Maison & Jardin", icon: "🏡", count: 18 },
+  { name: "Sport & Fitness", icon: "💪", count: 15 },
+  { name: "Beauté & Santé", icon: "💆", count: 22 },
+  { name: "Mode & Accessoires", icon: "👗", count: 12 },
+  { name: "Cuisine", icon: "🍳", count: 20 }
+];
+---
+
+<Layout 
+  title="Accueil - Tests & Avis Produits 2026"
+  description="Découvrez nos tests et avis honnêtes sur les meilleurs produits du marché. Guides d'achat, comparatifs et recommandations pour faire les bons choix."
+>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <p class="section-kicker">Sélection 2026</p>
+        <h1 class="hero-title">
+          Trouvez les <span class="highlight">meilleurs produits</span><br />
+          grâce à nos tests et avis
+        </h1>
+        <p class="hero-subtitle">
+          Des centaines de produits testés et comparés pour vous aider à faire les bons choix. 
+          Avis honnêtes, guides d'achat complets et recommandations personnalisées.
+        </p>
+        <div class="meta-block" aria-label="Détails de confiance">
+          <span class="badge-inline">Mise à jour janvier 2026</span>
+          <span class="badge-inline">Équipe d'experts produits</span>
+          <span class="badge-inline">Avis sans langue de bois</span>
+        </div>
+        <div class="hero-cta">
+          <AffiliateButton 
+            href="/articles"
+            text="Découvrir nos articles"
+            variant="accent"
+            size="large"
+            external={false}
+          />
+          <AffiliateButton 
+            href="/comparatifs"
+            text="Voir les comparatifs"
+            variant="secondary"
+            size="large"
+            external={false}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-label="Garanties et preuves de confiance" style="margin: 1.5rem 0 2.25rem;">
+    <div class="container">
+      <div class="trust-bar">
+        <span>✅ Produits achetés et testés</span>
+        <span>🔒 Liens affiliés transparents</span>
+        <span>⭐ Notes vérifiées par la rédaction</span>
+        <span>📅 Guides mis à jour en continu</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Articles -->
+  <section class="featured-section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <p class="section-kicker">À lire maintenant</p>
+          <h2 class="section-title">📌 Articles en vedette</h2>
+        </div>
+        <a href="/articles" class="btn btn-ghost btn-sm" aria-label="Voir tous les articles">Tout voir</a>
+      </div>
+      
+      <div class="articles-grid">
+        {featuredArticles.map(article => (
+          <article class="article-card">
+            <div class="card-image-wrapper">
+              <img src={article.image} alt={article.title} />
+              <span class="category-badge">{article.category}</span>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">
+                <a href={article.link}>{article.title}</a>
+              </h3>
+              <p class="card-excerpt">{article.excerpt}</p>
+              <div class="card-footer">
+                <span class="rating">⭐ {article.rating}/5</span>
+                <a href={article.link} class="read-more">Lire la suite →</a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="categories-section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <p class="section-kicker">Navigation rapide</p>
+          <h2 class="section-title">🗂️ Parcourir par catégorie</h2>
+        </div>
+        <span class="badge">+ de 100 guides</span>
+      </div>
+      
+      <div class="categories-grid">
+        {categories.map(category => (
+          <a href={`/categories/${category.name.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`} class="category-card">
+            <span class="category-icon">{category.icon}</span>
+            <h3 class="category-name">{category.name}</h3>
+            <span class="category-count">{category.count} articles</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="why-us-section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <p class="section-kicker">Transparence & méthode</p>
+          <h2 class="section-title">✨ Pourquoi nous faire confiance ?</h2>
+        </div>
+        <span class="badge-success badge">Procédé détaillé</span>
+      </div>
+      
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">🔍</div>
+          <h3>Tests approfondis</h3>
+          <p>Nous testons chaque produit pendant plusieurs semaines pour vous donner un avis complet et honnête.</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">📊</div>
+          <h3>Comparaisons détaillées</h3>
+          <p>Nos comparatifs vous permettent de voir rapidement les différences entre les produits.</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">💰</div>
+          <h3>Meilleurs prix</h3>
+          <p>Nous trouvons pour vous les meilleures offres et promotions du moment.</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">🔄</div>
+          <h3>Mise à jour régulière</h3>
+          <p>Nos articles sont constamment mis à jour avec les dernières informations et nouveautés.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section" aria-labelledby="cta-title">
+    <div class="container">
+      <div class="cta-panel">
+        <div class="cta-text">
+          <p class="section-kicker">Passez à l'action</p>
+          <h2 id="cta-title">Prêt à découvrir nos recommandations ?</h2>
+          <p class="lead">Rejoignez des milliers de lecteurs qui font les bons choix grâce à nos guides et comparatifs rédigés par des testeurs exigeants.</p>
+          <ul class="cta-points" aria-label="Pourquoi nous suivre">
+            <li>✅ Guides mis à jour chaque mois</li>
+            <li>✅ Sélection triée par usage et budget</li>
+            <li>✅ Liens d'affiliation transparents et signalés</li>
+          </ul>
+          <div class="cta-buttons">
+            <AffiliateButton 
+              href="/articles"
+              text="Explorer tous les articles"
+              variant="accent"
+              size="large"
+              external={false}
+            />
+            <AffiliateButton 
+              href="/comparatifs"
+              text="Voir les comparatifs"
+              variant="secondary"
+              size="large"
+              external={false}
+            />
+          </div>
+        </div>
+        <div class="cta-aside" aria-label="Chiffres clés">
+          <div class="cta-stat">
+            <span class="stat-number">120+</span>
+            <span class="stat-label">Guides détaillés</span>
+          </div>
+          <div class="cta-stat">
+            <span class="stat-number">4.8/5</span>
+            <span class="stat-label">Note moyenne lecteurs</span>
+          </div>
+          <div class="cta-quote">
+            <p>“Des recommandations claires, et des liens clairement indiqués. Un gain de temps énorme.”</p>
+            <span class="quote-author">— Lectrice fidèle</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

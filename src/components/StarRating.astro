@@ -1,0 +1,36 @@
+---
+/**
+ * Système de notation par étoiles
+ * Utilisation : <StarRating rating={4.5} maxRating={5} />
+ */
+interface Props {
+  rating: number;
+  maxRating?: number;
+  showNumber?: boolean;
+  size?: 'small' | 'medium' | 'large';
+}
+
+const { 
+  rating, 
+  maxRating = 5, 
+  showNumber = true,
+  size = 'medium'
+} = Astro.props;
+
+const percentage = (rating / maxRating) * 100;
+const sizeClass = `stars-${size}`;
+---
+
+<div class={`star-rating ${sizeClass}`}>
+  <div class="stars-container">
+    <div class="stars-background">
+      {'★'.repeat(maxRating)}
+    </div>
+    <div class="stars-filled" style={`width: ${percentage}%`}>
+      {'★'.repeat(maxRating)}
+    </div>
+  </div>
+  {showNumber && (
+    <span class="rating-number">{rating.toFixed(1)}/{maxRating}</span>
+  )}
+</div>

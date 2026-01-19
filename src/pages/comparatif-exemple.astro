@@ -1,0 +1,346 @@
+---
+/**
+ * TEMPLATE DE PAGE COMPARATIF
+ * 
+ * Ce template permet de comparer plusieurs produits côte à côte
+ * Optimisé pour le SEO et la conversion
+ */
+
+import Layout from '../layouts/Layout.astro';
+import ComparisonCard from '../components/ComparisonCard.astro';
+import AffiliateButton from '../components/AffiliateButton.astro';
+
+// ===== CONFIGURATION DU COMPARATIF =====
+const comparisonData = {
+  // SEO
+  title: "Top 5 des Meilleurs Produits XYZ en 2026 - Comparatif & Guide d'Achat",
+  description: "Comparatif complet des 5 meilleurs produits XYZ en 2026. Tests, avis, prix et guide d'achat pour faire le bon choix. Mis à jour régulièrement.",
+  
+  // Informations de la page
+  category: "Électronique",
+  lastUpdate: "19 janvier 2026",
+  
+  // Introduction
+  intro: {
+    title: "Quel est le meilleur produit XYZ en 2026 ?",
+    text: "Vous cherchez le meilleur produit XYZ mais vous êtes perdu face à la multitude d'offres ? Nous avons testé et comparé les 5 modèles les plus populaires du marché pour vous aider à faire le bon choix. Découvrez notre sélection basée sur 3 mois de tests approfondis."
+  }
+};
+
+// Liste des produits à comparer
+const products = [
+  {
+    name: "Produit Premium XYZ",
+    image: "/images/products/produit-xyz-main.jpg",
+    rating: 4.8,
+    price: "299€",
+    pros: [
+      "Qualité de fabrication exceptionnelle",
+      "Excellent rapport qualité-prix",
+      "Garantie 2 ans"
+    ],
+    cons: [
+      "Un peu lourd",
+      "Notice en anglais"
+    ],
+    affiliateLink: "https://votre-lien-affilie.com/produit-1",
+    badge: "MEILLEUR CHOIX"
+  },
+  {
+    name: "Produit Économique ABC",
+    image: "/images/products/produit-abc-main.jpg",
+    rating: 4.3,
+    price: "149€",
+    pros: [
+      "Prix très abordable",
+      "Bon pour les débutants",
+      "Léger et compact"
+    ],
+    cons: [
+      "Matériaux moins robustes",
+      "Garantie 1 an seulement"
+    ],
+    affiliateLink: "https://votre-lien-affilie.com/produit-2",
+    badge: "MEILLEUR PRIX"
+  },
+  {
+    name: "Produit Haut de Gamme DEF",
+    image: "/images/products/produit-def-main.jpg",
+    rating: 4.9,
+    price: "499€",
+    pros: [
+      "Performances exceptionnelles",
+      "Design premium",
+      "Garantie 3 ans"
+    ],
+    cons: [
+      "Prix élevé",
+      "Complexe pour les débutants"
+    ],
+    affiliateLink: "https://votre-lien-affilie.com/produit-3"
+  },
+  {
+    name: "Produit Milieu de Gamme GHI",
+    image: "/images/products/produit-ghi-main.jpg",
+    rating: 4.5,
+    price: "249€",
+    pros: [
+      "Bon équilibre qualité-prix",
+      "Polyvalent",
+      "Service client réactif"
+    ],
+    cons: [
+      "Design un peu daté",
+      "Pas d'accessoires inclus"
+    ],
+    affiliateLink: "https://votre-lien-affilie.com/produit-4"
+  },
+  {
+    name: "Produit Innovant JKL",
+    image: "/images/products/produit-jkl-main.jpg",
+    rating: 4.4,
+    price: "329€",
+    pros: [
+      "Technologie innovante",
+      "Interface intuitive",
+      "Mises à jour régulières"
+    ],
+    cons: [
+      "Nouveauté, peu de recul",
+      "Stock limité"
+    ],
+    affiliateLink: "https://votre-lien-affilie.com/produit-5"
+  }
+];
+
+// Critères de sélection
+const selectionCriteria = [
+  {
+    name: "Qualité de fabrication",
+    description: "Nous avons évalué les matériaux utilisés, la finition et la robustesse de chaque produit."
+  },
+  {
+    name: "Rapport qualité-prix",
+    description: "Le prix est comparé aux fonctionnalités et à la qualité offerte."
+  },
+  {
+    name: "Facilité d'utilisation",
+    description: "L'ergonomie et la courbe d'apprentissage ont été testées par des débutants et experts."
+  },
+  {
+    name: "Performance",
+    description: "Tests de performance dans des conditions réelles d'utilisation."
+  },
+  {
+    name: "Service après-vente",
+    description: "Garantie, politique de retour et réactivité du service client."
+  }
+];
+---
+
+<Layout 
+  title={comparisonData.title}
+  description={comparisonData.description}
+>
+  <article class="comparison-page">
+    <!-- Header -->
+    <div class="page-header container">
+      <div class="breadcrumb">
+        <a href="/">Accueil</a> » 
+        <a href="/comparatifs">Comparatifs</a> » 
+        <span>{comparisonData.category}</span>
+      </div>
+      
+      <h1 class="page-title">{comparisonData.intro.title}</h1>
+      
+      <p class="page-subtitle">{comparisonData.intro.text}</p>
+      
+      <div class="meta-info">
+        <span>📅 Mis à jour le {comparisonData.lastUpdate}</span>
+        <span>⏱️ Lecture : 10 min</span>
+      </div>
+    </div>
+
+    <!-- Quick comparison table -->
+    <div class="container">
+      <section class="quick-winner">
+        <div class="winner-content">
+          <h2>🏆 Notre vainqueur</h2>
+          <h3>{products[0].name}</h3>
+          <p>Après avoir testé tous ces produits, le <strong>{products[0].name}</strong> se démarque comme le meilleur choix en {new Date().getFullYear()}.</p>
+          <AffiliateButton 
+            href={products[0].affiliateLink}
+            text="Voir le meilleur prix"
+            variant="accent"
+            size="large"
+            track={products[0].name}
+          />
+        </div>
+      </section>
+    </div>
+
+    <!-- Main content -->
+    <div class="container content-wrapper">
+      
+      <!-- Table of contents -->
+      <nav class="table-of-contents">
+        <h2>📋 Sommaire</h2>
+        <ol>
+          <li><a href="#comparaison">Comparaison des 5 meilleurs produits</a></li>
+          <li><a href="#criteres">Nos critères de sélection</a></li>
+          <li><a href="#guide">Guide d'achat</a></li>
+          <li><a href="#faq">Questions fréquentes</a></li>
+        </ol>
+      </nav>
+
+      <!-- Comparison section -->
+      <section id="comparaison">
+        <h2>🔍 Comparaison détaillée des produits</h2>
+        <p>
+          Voici notre sélection des 5 meilleurs produits XYZ actuellement disponibles sur le marché, 
+          classés par ordre de préférence après nos tests approfondis :
+        </p>
+
+        <div class="comparison-grid">
+          {products.map((product, index) => (
+            <ComparisonCard 
+              product={product}
+              rank={index + 1}
+            />
+          ))}
+        </div>
+      </section>
+
+      <!-- Selection criteria -->
+      <section id="criteres">
+        <h2>📊 Nos critères de sélection</h2>
+        <p>
+          Pour établir ce classement, nous avons évalué chaque produit selon 5 critères essentiels :
+        </p>
+        
+        <div class="criteria-grid">
+          {selectionCriteria.map(criterion => (
+            <div class="criterion-card">
+              <h3>{criterion.name}</h3>
+              <p>{criterion.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Buying guide -->
+      <section id="guide">
+        <h2>🛍️ Guide d'achat : Comment choisir ?</h2>
+        
+        <h3>1. Définissez votre budget</h3>
+        <p>
+          Les prix varient de 149€ à 499€. Notre conseil : le <strong>{products[0].name}</strong> 
+          à 299€ offre le meilleur rapport qualité-prix.
+        </p>
+        
+        <h3>2. Identifiez vos besoins</h3>
+        <ul>
+          <li><strong>Débutant :</strong> Optez pour le {products[1].name} (simple et économique)</li>
+          <li><strong>Utilisateur régulier :</strong> Le {products[0].name} est parfait</li>
+          <li><strong>Expert :</strong> Le {products[2].name} offre les meilleures performances</li>
+        </ul>
+        
+        <h3>3. Vérifiez la garantie</h3>
+        <p>
+          Une bonne garantie est essentielle. Privilégiez les produits avec au moins 2 ans de garantie.
+        </p>
+        
+        <h3>4. Lisez les avis</h3>
+        <p>
+          Consultez les avis d'autres utilisateurs pour vous faire une idée précise. Tous nos produits 
+          recommandés ont plus de 4.3/5 étoiles.
+        </p>
+
+        <div class="guide-cta">
+          <div class="cta-box">
+            <h3>Prêt à faire votre choix ?</h3>
+            <p>Notre recommandation : {products[0].name}</p>
+            <AffiliateButton 
+              href={products[0].affiliateLink}
+              text="Voir l'offre du moment"
+              variant="accent"
+              size="large"
+              track={products[0].name}
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="faq-section">
+        <h2>❓ Questions fréquentes</h2>
+        
+        <div class="faq-item">
+          <h3>Quel est le meilleur produit XYZ en {new Date().getFullYear()} ?</h3>
+          <p>
+            Selon nos tests, le <strong>{products[0].name}</strong> est le meilleur choix global 
+            grâce à son excellent rapport qualité-prix et ses performances.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Quel est le produit le moins cher ?</h3>
+          <p>
+            Le <strong>{products[1].name}</strong> à {products[1].price} est l'option la plus économique 
+            sans compromis majeur sur la qualité.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Quelle est la différence entre ces produits ?</h3>
+          <p>
+            Les principales différences concernent la qualité de fabrication, les performances, 
+            le prix et les fonctionnalités avancées. Consultez nos cartes de comparaison ci-dessus 
+            pour les détails.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Ces produits sont-ils garantis ?</h3>
+          <p>
+            Oui, tous les produits de notre sélection bénéficient d'une garantie constructeur 
+            d'au moins 1 an, et jusqu'à 3 ans pour les modèles haut de gamme.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Peut-on retourner un produit si on n'est pas satisfait ?</h3>
+          <p>
+            Oui, la plupart des vendeurs offrent un délai de rétractation de 30 jours. 
+            Vérifiez les conditions spécifiques lors de votre achat.
+          </p>
+        </div>
+      </section>
+
+      <!-- Final CTA -->
+      <section class="final-cta">
+        <div class="cta-box">
+          <h2>Faites le bon choix dès aujourd'hui</h2>
+          <p>Profitez des meilleures offres du moment</p>
+          <div class="cta-buttons">
+            <AffiliateButton 
+              href={products[0].affiliateLink}
+              text="🏆 Voir le N°1"
+              variant="accent"
+              size="large"
+              track={products[0].name}
+            />
+            <AffiliateButton 
+              href={products[1].affiliateLink}
+              text="💰 Voir le meilleur prix"
+              variant="secondary"
+              size="large"
+              track={products[1].name}
+            />
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </article>
+</Layout>

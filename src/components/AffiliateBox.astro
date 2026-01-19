@@ -1,0 +1,69 @@
+---
+/**
+ * Encart d'affiliation - Bloc mis en évidence pour les produits
+ * Utilisation : <AffiliateBox title="Meilleur choix" />
+ */
+interface Props {
+  title: string;
+  productName: string;
+  price?: string;
+  image?: string;
+  affiliateLink: string;
+  badge?: string;
+  features?: string[];
+}
+
+const { 
+  title,
+  productName,
+  price,
+  image,
+  affiliateLink,
+  badge,
+  features = []
+} = Astro.props;
+
+import AffiliateButton from './AffiliateButton.astro';
+---
+
+<div class="affiliate-box">
+  {badge && <span class="affiliate-badge badge badge-success">{badge}</span>}
+  
+  <h3 class="box-title">{title}</h3>
+  
+  <div class="box-content">
+    {image && (
+      <div class="box-image">
+        <img src={image} alt={productName} loading="lazy" />
+      </div>
+    )}
+    
+    <div class="box-info">
+      <h4 class="product-name">{productName}</h4>
+      
+      {price && (
+        <div class="price-tag">
+          <span class="price">{price}</span>
+        </div>
+      )}
+      
+      {features.length > 0 && (
+        <ul class="features-list">
+          {features.map(feature => (
+            <li>✓ {feature}</li>
+          ))}
+        </ul>
+      )}
+      
+      <div class="box-cta">
+        <AffiliateButton 
+          href={affiliateLink} 
+          text="Voir le meilleur prix"
+          variant="accent"
+          size="large"
+          track={productName}
+        />
+      </div>
+    </div>
+  </div>
+</div>

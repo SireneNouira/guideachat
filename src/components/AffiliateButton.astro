@@ -1,0 +1,41 @@
+---
+/**
+ * Bouton d'affiliation - Composant principal pour les CTA
+ * Utilisation : <AffiliateButton href="lien-affilié" text="Voir le produit" />
+ */
+interface Props {
+  href: string;
+  text?: string;
+  variant?: 'primary' | 'secondary' | 'accent';
+  size?: 'normal' | 'large';
+  icon?: string;
+  external?: boolean;
+  track?: string; // Pour le tracking analytics
+}
+
+const { 
+  href, 
+  text = "Voir l'offre", 
+  variant = 'primary',
+  size = 'normal',
+  icon = '→',
+  external = true,
+  track = ''
+} = Astro.props;
+
+const variantClass = `btn-${variant}`;
+const sizeClass = size === 'large' ? 'btn-lg' : '';
+const relAttr = external ? 'noopener noreferrer nofollow' : '';
+const targetAttr = external ? '_blank' : '_self';
+---
+
+<a 
+  href={href} 
+  class={`btn affiliate-btn ${variantClass} ${sizeClass}`}
+  rel={relAttr}
+  target={targetAttr}
+  data-track={track}
+>
+  <span class="btn-text">{text}</span>
+  {icon && <span class="btn-icon">{icon}</span>}
+</a>

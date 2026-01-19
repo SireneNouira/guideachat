@@ -1,0 +1,31 @@
+---
+/**
+ * Tableau de caractéristiques produit
+ * Utilisation : <ProductSpecs specs={[{label: "...", value: "..."}]} />
+ */
+interface Spec {
+  label: string;
+  value: string;
+}
+
+interface Props {
+  title?: string;
+  specs: Spec[];
+}
+
+const { title = "Caractéristiques techniques", specs } = Astro.props;
+---
+
+<div class="product-specs">
+  <h3 class="specs-title">{title}</h3>
+  <table class="specs-table">
+    <tbody>
+      {specs.map(spec => (
+        <tr>
+          <td class="spec-label">{spec.label}</td>
+          <td class="spec-value">{spec.value}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

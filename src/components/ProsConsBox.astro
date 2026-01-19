@@ -1,0 +1,44 @@
+---
+/**
+ * Section Avantages/Inconvénients
+ * Utilisation : <ProsConsBox pros={[...]} cons={[...]} />
+ */
+interface Props {
+  pros?: string[];
+  cons?: string[];
+}
+
+const { pros = [], cons = [] } = Astro.props;
+---
+
+<div class="pros-cons-container">
+  {pros.length > 0 && (
+    <div class="pros-box">
+      <h3 class="box-header pros-header">
+        <span class="icon">✓</span> Avantages
+      </h3>
+      <ul class="list">
+        {pros.map(pro => (
+          <li class="pro-item">
+            <span class="bullet">✓</span> {pro}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+  
+  {cons.length > 0 && (
+    <div class="cons-box">
+      <h3 class="box-header cons-header">
+        <span class="icon">✗</span> Inconvénients
+      </h3>
+      <ul class="list">
+        {cons.map(con => (
+          <li class="con-item">
+            <span class="bullet">✗</span> {con}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+</div>
