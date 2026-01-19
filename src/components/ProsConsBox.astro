@@ -9,18 +9,20 @@ interface Props {
 }
 
 const { pros = [], cons = [] } = Astro.props;
+
+import Icon from './Icon.astro';
 ---
 
 <div class="pros-cons-container">
   {pros.length > 0 && (
     <div class="pros-box">
       <h3 class="box-header pros-header">
-        <span class="icon">✓</span> Avantages
+        <Icon name="check" class="icon-accent icon-lg" /> Avantages
       </h3>
       <ul class="list">
         {pros.map(pro => (
           <li class="pro-item">
-            <span class="bullet">✓</span> {pro}
+            <Icon name="check" class="bullet icon-accent" size={18} /> {pro}
           </li>
         ))}
       </ul>
@@ -30,12 +32,12 @@ const { pros = [], cons = [] } = Astro.props;
   {cons.length > 0 && (
     <div class="cons-box">
       <h3 class="box-header cons-header">
-        <span class="icon">✗</span> Inconvénients
+        <Icon name="x" class="icon-muted icon-lg" /> Inconvénients
       </h3>
       <ul class="list">
         {cons.map(con => (
           <li class="con-item">
-            <span class="bullet">✗</span> {con}
+            <Icon name="x" class="bullet icon-muted" size={18} /> {con}
           </li>
         ))}
       </ul>

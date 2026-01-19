@@ -24,6 +24,7 @@ const {
 } = Astro.props;
 
 import AffiliateButton from './AffiliateButton.astro';
+import Icon from './Icon.astro';
 ---
 
 <div class="affiliate-box">
@@ -50,7 +51,9 @@ import AffiliateButton from './AffiliateButton.astro';
       {features.length > 0 && (
         <ul class="features-list">
           {features.map(feature => (
-            <li>✓ {feature}</li>
+            <li>
+              <Icon name="check" class="icon-accent" size={18} /> {feature}
+            </li>
           ))}
         </ul>
       )}

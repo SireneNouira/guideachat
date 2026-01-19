@@ -1,12 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import AffiliateButton from '../components/AffiliateButton.astro';
+import Icon from '../components/Icon.astro';
 
 const featuredArticles = [
   {
     title: "Test & Avis Produit Premium XYZ",
     excerpt: "Notre test complet du produit le plus populaire de 2026",
-    image: "/images/products/produit-xyz-main.jpg",
+    image: "/images/img.jpg",
     category: "Électronique",
     link: "/article-produit-exemple",
     rating: 4.8
@@ -14,7 +15,7 @@ const featuredArticles = [
   {
     title: "Top 5 des Meilleurs Produits XYZ",
     excerpt: "Comparatif complet pour faire le bon choix",
-    image: "/images/products/comparatif-hero.jpg",
+    image: "/images/img2.jpg",
     category: "Comparatifs",
     link: "/comparatif-exemple",
     rating: 4.9
@@ -22,12 +23,12 @@ const featuredArticles = [
 ];
 
 const categories = [
-  { name: "Électronique", icon: "💻", count: 25 },
-  { name: "Maison & Jardin", icon: "🏡", count: 18 },
-  { name: "Sport & Fitness", icon: "💪", count: 15 },
-  { name: "Beauté & Santé", icon: "💆", count: 22 },
-  { name: "Mode & Accessoires", icon: "👗", count: 12 },
-  { name: "Cuisine", icon: "🍳", count: 20 }
+  { name: "Électronique", icon: "device-laptop", count: 25, tag: "Tendance", color: "#1f8ef1", description: "Smartphones, laptops, audio et maison connectée" },
+  { name: "Maison & Jardin", icon: "home-2", count: 18, tag: "Nouveaux tests", color: "#16a085", description: "Robot aspirateurs, outils sans fil, déco durable" },
+  { name: "Sport & Fitness", icon: "dumbbell", count: 15, tag: "Performance", color: "#e67e22", description: "Montres GPS, cardio, home gym et récupération" },
+  { name: "Beauté & Santé", icon: "flower", count: 22, tag: "Soins", color: "#ff6b6b", description: "Dermocosmétique, bien-être, appareils de soin" },
+  { name: "Mode & Accessoires", icon: "shirt", count: 12, tag: "Style", color: "#0f172a", description: "Sacs, sneakers, techwear et montres urbaines" },
+  { name: "Cuisine", icon: "chef-hat", count: 20, tag: "Indispensable", color: "#27ae60", description: "Robots, café, cuisson lente et batch cooking" }
 ];
 ---
 
@@ -73,16 +74,6 @@ const categories = [
     </div>
   </section>
 
-  <section aria-label="Garanties et preuves de confiance" style="margin: 1.5rem 0 2.25rem;">
-    <div class="container">
-      <div class="trust-bar">
-        <span>✅ Produits achetés et testés</span>
-        <span>🔒 Liens affiliés transparents</span>
-        <span>⭐ Notes vérifiées par la rédaction</span>
-        <span>📅 Guides mis à jour en continu</span>
-      </div>
-    </div>
-  </section>
 
   <!-- Featured Articles -->
   <section class="featured-section">
@@ -90,7 +81,7 @@ const categories = [
       <div class="section-header">
         <div>
           <p class="section-kicker">À lire maintenant</p>
-          <h2 class="section-title">📌 Articles en vedette</h2>
+          <h2 class="section-title"><Icon name="map-pin" class="icon-accent" /> Articles en vedette</h2>
         </div>
         <a href="/articles" class="btn btn-ghost btn-sm" aria-label="Voir tous les articles">Tout voir</a>
       </div>
@@ -108,8 +99,8 @@ const categories = [
               </h3>
               <p class="card-excerpt">{article.excerpt}</p>
               <div class="card-footer">
-                <span class="rating">⭐ {article.rating}/5</span>
-                <a href={article.link} class="read-more">Lire la suite →</a>
+                <span class="rating"><Icon name="star" class="icon-accent" size={18} /> {article.rating}/5</span>
+                <a href={article.link} class="read-more">Lire la suite <Icon name="arrow-right" class="icon-accent" size={16} /></a>
               </div>
             </div>
           </article>
@@ -118,70 +109,72 @@ const categories = [
     </div>
   </section>
 
+
+
   <!-- Categories Section -->
   <section class="categories-section">
     <div class="container">
-      <div class="section-header">
-        <div>
-          <p class="section-kicker">Navigation rapide</p>
-          <h2 class="section-title">🗂️ Parcourir par catégorie</h2>
+      <div class="categories-shell">
+        <div class="section-header">
+          <div>
+            <p class="section-kicker">Navigation rapide</p>
+            <h2 class="section-title"><Icon name="folders" class="icon-accent" /> Parcourir par catégorie</h2>
+            <p class="section-subtitle">Accédez directement aux dossiers les plus consultés, mis à jour avec nos derniers tests et comparatifs.</p>
+          </div>
+          <span class="badge">+ de 100 guides</span>
         </div>
-        <span class="badge">+ de 100 guides</span>
-      </div>
+
+        <div class="categories-toolbar" aria-label="Filtres rapides">
+          <span class="chip chip-ghost">Guides d'achat</span>
+          <span class="chip chip-ghost">Comparatifs</span>
+          <span class="chip chip-ghost">Promos suivies</span>
+          <span class="chip chip-ghost">Mises à jour 2026</span>
+        </div>
       
-      <div class="categories-grid">
-        {categories.map(category => (
-          <a href={`/categories/${category.name.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`} class="category-card">
-            <span class="category-icon">{category.icon}</span>
-            <h3 class="category-name">{category.name}</h3>
-            <span class="category-count">{category.count} articles</span>
-          </a>
-        ))}
+        <div class="categories-grid">
+          {categories.map(category => (
+            <a
+              href={`/categories/${category.name.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`}
+              class="category-card"
+              style={`--category-color: ${category.color}`}
+            >
+              <div class="category-card__top">
+                <Icon name={category.icon} class="category-icon icon-accent" size={24} />
+                <span class="category-tag">{category.tag}</span>
+              </div>
+              <div class="category-card__body">
+                <h3 class="category-name">{category.name}</h3>
+                <p class="category-description">{category.description}</p>
+              </div>
+              <div class="category-card__meta">
+                <span class="category-count">{category.count} articles</span>
+                <span class="category-arrow" aria-hidden="true"><Icon name="arrow-right" size={16} /></span>
+              </div>
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   </section>
-
-  <!-- Why Choose Us -->
-  <section class="why-us-section">
+  
+ <section class="trust-section" aria-label="Garanties et preuves de confiance">
     <div class="container">
-      <div class="section-header">
-        <div>
-          <p class="section-kicker">Transparence & méthode</p>
-          <h2 class="section-title">✨ Pourquoi nous faire confiance ?</h2>
+      <div class="trust-panel">
+        <div class="trust-copy">
+          <p class="section-kicker">Transparence</p>
+          <h2 class="section-title">Garanties et preuves de confiance</h2>
+          <p class="trust-note">Chaque recommandation suit notre charte : achats réels, tests prolongés, divulgation des liens d'affiliation.</p>
         </div>
-        <span class="badge-success badge">Procédé détaillé</span>
-      </div>
-      
-      <div class="benefits-grid">
-        <div class="benefit-card">
-          <div class="benefit-icon">🔍</div>
-          <h3>Tests approfondis</h3>
-          <p>Nous testons chaque produit pendant plusieurs semaines pour vous donner un avis complet et honnête.</p>
-        </div>
-        
-        <div class="benefit-card">
-          <div class="benefit-icon">📊</div>
-          <h3>Comparaisons détaillées</h3>
-          <p>Nos comparatifs vous permettent de voir rapidement les différences entre les produits.</p>
-        </div>
-        
-        <div class="benefit-card">
-          <div class="benefit-icon">💰</div>
-          <h3>Meilleurs prix</h3>
-          <p>Nous trouvons pour vous les meilleures offres et promotions du moment.</p>
-        </div>
-        
-        <div class="benefit-card">
-          <div class="benefit-icon">🔄</div>
-          <h3>Mise à jour régulière</h3>
-          <p>Nos articles sont constamment mis à jour avec les dernières informations et nouveautés.</p>
+        <div class="trust-bar" role="list">
+          <div class="trust-item" role="listitem"><Icon name="check" class="icon-accent" /> Produits achetés et testés</div>
+          <div class="trust-item" role="listitem"><Icon name="lock" class="icon-accent" /> Liens affiliés transparents</div>
+          <div class="trust-item" role="listitem"><Icon name="star" class="icon-accent" /> Notes vérifiées par la rédaction</div>
+          <div class="trust-item" role="listitem"><Icon name="calendar-event" class="icon-accent" /> Guides mis à jour en continu</div>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- CTA Section -->
-  <section class="cta-section" aria-labelledby="cta-title">
+   <section class="cta-section" aria-labelledby="cta-title">
     <div class="container">
       <div class="cta-panel">
         <div class="cta-text">
@@ -189,9 +182,9 @@ const categories = [
           <h2 id="cta-title">Prêt à découvrir nos recommandations ?</h2>
           <p class="lead">Rejoignez des milliers de lecteurs qui font les bons choix grâce à nos guides et comparatifs rédigés par des testeurs exigeants.</p>
           <ul class="cta-points" aria-label="Pourquoi nous suivre">
-            <li>✅ Guides mis à jour chaque mois</li>
-            <li>✅ Sélection triée par usage et budget</li>
-            <li>✅ Liens d'affiliation transparents et signalés</li>
+            <li><Icon name="check" class="icon-accent" /> Guides mis à jour chaque mois</li>
+            <li><Icon name="check" class="icon-accent" /> Sélection triée par usage et budget</li>
+            <li><Icon name="check" class="icon-accent" /> Liens d'affiliation transparents et signalés</li>
           </ul>
           <div class="cta-buttons">
             <AffiliateButton 
@@ -227,4 +220,47 @@ const categories = [
       </div>
     </div>
   </section>
+  
+  <!-- Why Choose Us -->
+  <section class="why-us-section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <p class="section-kicker">Transparence & méthode</p>
+          <h2 class="section-title"><Icon name="badge-check" class="icon-accent" /> Pourquoi nous faire confiance ?</h2>
+        </div>
+        <span class="badge-success badge">Procédé détaillé</span>
+      </div>
+      
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon"><Icon name="search" class="icon-accent" size={24} /></div>
+          <h3>Tests approfondis</h3>
+          <p>Nous testons chaque produit pendant plusieurs semaines pour vous donner un avis complet et honnête.</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon"><Icon name="chart-bar" class="icon-accent" size={24} /></div>
+          <h3>Comparaisons détaillées</h3>
+          <p>Nos comparatifs vous permettent de voir rapidement les différences entre les produits.</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon"><Icon name="currency-euro" class="icon-accent" size={24} /></div>
+          <h3>Meilleurs prix</h3>
+          <p>Nous trouvons pour vous les meilleures offres et promotions du moment.</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon"><Icon name="refresh" class="icon-accent" size={24} /></div>
+          <h3>Mise à jour régulière</h3>
+          <p>Nos articles sont constamment mis à jour avec les dernières informations et nouveautés.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+ 
+  
 </Layout>

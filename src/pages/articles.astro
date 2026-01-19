@@ -1,0 +1,192 @@
+---
+import Layout from "../layouts/Layout.astro";
+import AffiliateButton from "../components/AffiliateButton.astro";
+import Icon from "../components/Icon.astro";
+
+const lastUpdate = "19 janvier 2026";
+
+const categories = [
+  { name: "Électronique", count: 25, tag: "Tests", color: "#1f8ef1" },
+  { name: "Maison & Jardin", count: 18, tag: "Guides", color: "#16a085" },
+  { name: "Sport & Fitness", count: 15, tag: "En cours", color: "#e67e22" },
+  { name: "Beauté & Santé", count: 22, tag: "Soins", color: "#ff6b6b" },
+  { name: "Mode & Accessoires", count: 12, tag: "Style", color: "#0f172a" },
+  { name: "Cuisine", count: 20, tag: "Cuisine", color: "#27ae60" }
+];
+
+const articles = [
+  {
+    title: "Test & Avis Produit Premium XYZ",
+    excerpt: "Avis complet après 3 mois de test, avec avantages, inconvénients et meilleur prix.",
+    image: "/images/img3.jpg",
+    category: "Électronique",
+    date: "15 janvier 2026",
+    readTime: "8 min",
+    link: "/article-produit-exemple",
+    tag: "Test produit"
+  },
+  {
+    title: "Top 5 des Meilleurs Produits XYZ",
+    excerpt: "Comparatif 2026 mis à jour avec nos recommandations et critères de choix.",
+    image: "/images/img.jpg",
+    category: "Comparatifs",
+    date: "19 janvier 2026",
+    readTime: "10 min",
+    link: "/comparatif-exemple",
+    tag: "Comparatif"
+  },
+  {
+    title: "Guide d'achat : Comment choisir le bon modèle ?",
+    excerpt: "Les 7 critères indispensables avant de passer à l'achat pour éviter les regrets.",
+    image: "/images/img2.jpg",
+    category: "Guides d'achat",
+    date: "10 janvier 2026",
+    readTime: "6 min",
+    link: "/article-produit-exemple#guide-achat",
+    tag: "Guide"
+  },
+  {
+    title: "Comparatif rapide : 3 alternatives crédibles",
+    excerpt: "Notre shortlist des modèles les plus fiables si le produit phare est en rupture.",
+    image: "/images/img4.jpg",
+    category: "Comparatifs",
+    date: "05 janvier 2026",
+    readTime: "5 min",
+    link: "/comparatif-exemple#comparaison",
+    tag: "Shortlist"
+  },
+  {
+    title: "FAQ : tout savoir avant d'acheter",
+    excerpt: "Réponses aux questions les plus fréquentes : garantie, SAV, accessoires, prix.",
+    image: "/images/img3.jpg",
+    category: "FAQ",
+    date: "02 janvier 2026",
+    readTime: "4 min",
+    link: "/article-produit-exemple#faq",
+    tag: "FAQ"
+  },
+  {
+    title: "Mises à jour 2026 : changements majeurs",
+    excerpt: "Nouvelles versions, stocks, et baisses de prix à surveiller ce mois-ci.",
+    image: "/images/img2.jpg",
+    category: "Mises à jour",
+    date: "01 janvier 2026",
+    readTime: "3 min",
+    link: "/article-produit-exemple#maj",
+    tag: "Update"
+  }
+];
+---
+
+<Layout
+  title="Tous nos articles 2026"
+  description="Parcourez tous nos tests produits, comparatifs et guides d'achat. Sélection mise à jour en 2026 pour choisir en toute confiance."
+  canonicalUrl="/articles"
+>
+  <article class="page-shell">
+
+    <section class="featured-section">
+      <div class="section-header">
+        <div>
+          <p class="section-kicker">Sélection du moment</p>
+          <h2 class="section-title">
+            <Icon name="star" class="icon-accent" /> Articles en avant
+          </h2>
+          <p class="section-subtitle">Nos contenus les plus consultés cette semaine.</p>
+        </div>
+        <a href="#liste-articles" class="btn btn-ghost btn-sm" aria-label="Aller à la liste des articles">Parcourir</a>
+      </div>
+
+      <div class="articles-grid">
+        {articles.slice(0, 3).map((article) => (
+          <article class="article-card">
+            <div class="card-image-wrapper">
+              <img src={article.image} alt={article.title} loading="lazy" />
+              <span class="category-badge">{article.tag}</span>
+            </div>
+            <div class="card-content">
+              <div class="card-meta muted">{article.date} · {article.readTime}</div>
+              <h3 class="card-title"><a href={article.link}>{article.title}</a></h3>
+              <p class="card-excerpt">{article.excerpt}</p>
+              <div class="card-footer">
+                <span class="rating"><Icon name="map-pin" class="icon-accent" size={18} /> {article.category}</span>
+                <a href={article.link} class="read-more">
+                  Lire <Icon name="arrow-right" class="icon-accent" size={16} />
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="categories-section">
+      <div class="categories-shell">
+        <div class="section-header">
+          <div>
+            <p class="section-kicker">Catégories</p>
+            <h2 class="section-title"><Icon name="folders" class="icon-accent" /> Parcourir par thème</h2>
+            <p class="section-subtitle">Tests, guides et comparatifs rangés par univers.</p>
+          </div>
+          <span class="badge">{articles.length} articles</span>
+        </div>
+
+        <div class="categories-grid">
+          {categories.map((category) => (
+            <a
+              href={`/categories/${category.name.toLowerCase().replace(/ & /g, "-").replace(/ /g, "-")}`}
+              class="category-card"
+              style={`--category-color: ${category.color}`}
+            >
+              <div class="category-card__top">
+                <Icon name="folder" class="category-icon icon-accent" size={22} />
+                <span class="category-tag">{category.tag}</span>
+              </div>
+              <div class="category-card__body">
+                <h3 class="category-name">{category.name}</h3>
+                <p class="category-description">Sélection d'articles et guides dédiés.</p>
+              </div>
+              <div class="category-card__meta">
+                <span class="category-count">{category.count} articles</span>
+                <span class="category-arrow" aria-hidden="true"><Icon name="arrow-right" size={16} /></span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="liste-articles" class="page-section">
+      <div class="section-header">
+        <div>
+          <p class="section-kicker">Tous les contenus</p>
+          <h2 class="section-title"><Icon name="list" class="icon-accent" /> Liste complète</h2>
+          <p class="section-subtitle">Tests produits, comparatifs, guides pratiques et FAQ.</p>
+        </div>
+        <span class="badge-dark badge">Trié par date</span>
+      </div>
+
+      <div class="articles-grid">
+        {articles.map((article) => (
+          <article class="article-card">
+            <div class="card-image-wrapper">
+              <img src={article.image} alt={article.title} loading="lazy" />
+              <span class="category-badge">{article.tag}</span>
+            </div>
+            <div class="card-content">
+              <div class="card-meta muted">{article.date} · {article.readTime}</div>
+              <h3 class="card-title"><a href={article.link}>{article.title}</a></h3>
+              <p class="card-excerpt">{article.excerpt}</p>
+              <div class="card-footer">
+                <span class="rating"><Icon name="map-pin" class="icon-accent" size={18} /> {article.category}</span>
+                <a href={article.link} class="read-more">
+                  Lire <Icon name="arrow-right" class="icon-accent" size={16} />
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  </article>
+</Layout>

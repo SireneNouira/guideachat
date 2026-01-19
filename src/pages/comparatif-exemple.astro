@@ -9,6 +9,7 @@
 import Layout from '../layouts/Layout.astro';
 import ComparisonCard from '../components/ComparisonCard.astro';
 import AffiliateButton from '../components/AffiliateButton.astro';
+import Icon from '../components/Icon.astro';
 
 // ===== CONFIGURATION DU COMPARATIF =====
 const comparisonData = {
@@ -156,8 +157,8 @@ const selectionCriteria = [
       <p class="page-subtitle">{comparisonData.intro.text}</p>
       
       <div class="meta-info">
-        <span>📅 Mis à jour le {comparisonData.lastUpdate}</span>
-        <span>⏱️ Lecture : 10 min</span>
+        <span><Icon name="calendar-event" class="icon-accent" /> Mis à jour le {comparisonData.lastUpdate}</span>
+        <span><Icon name="clock" class="icon-accent" /> Lecture : 10 min</span>
       </div>
     </div>
 
@@ -165,7 +166,7 @@ const selectionCriteria = [
     <div class="container">
       <section class="quick-winner">
         <div class="winner-content">
-          <h2>🏆 Notre vainqueur</h2>
+          <h2><Icon name="trophy" class="icon-accent" /> Notre vainqueur</h2>
           <h3>{products[0].name}</h3>
           <p>Après avoir testé tous ces produits, le <strong>{products[0].name}</strong> se démarque comme le meilleur choix en {new Date().getFullYear()}.</p>
           <AffiliateButton 
@@ -184,7 +185,7 @@ const selectionCriteria = [
       
       <!-- Table of contents -->
       <nav class="table-of-contents">
-        <h2>📋 Sommaire</h2>
+        <h2><Icon name="clipboard-list" class="icon-accent" /> Sommaire</h2>
         <ol>
           <li><a href="#comparaison">Comparaison des 5 meilleurs produits</a></li>
           <li><a href="#criteres">Nos critères de sélection</a></li>
@@ -195,7 +196,7 @@ const selectionCriteria = [
 
       <!-- Comparison section -->
       <section id="comparaison">
-        <h2>🔍 Comparaison détaillée des produits</h2>
+        <h2><Icon name="search" class="icon-accent" /> Comparaison détaillée des produits</h2>
         <p>
           Voici notre sélection des 5 meilleurs produits XYZ actuellement disponibles sur le marché, 
           classés par ordre de préférence après nos tests approfondis :
@@ -213,7 +214,7 @@ const selectionCriteria = [
 
       <!-- Selection criteria -->
       <section id="criteres">
-        <h2>📊 Nos critères de sélection</h2>
+        <h2><Icon name="chart-bar" class="icon-accent" /> Nos critères de sélection</h2>
         <p>
           Pour établir ce classement, nous avons évalué chaque produit selon 5 critères essentiels :
         </p>
@@ -230,7 +231,7 @@ const selectionCriteria = [
 
       <!-- Buying guide -->
       <section id="guide">
-        <h2>🛍️ Guide d'achat : Comment choisir ?</h2>
+        <h2><Icon name="shopping-bag" class="icon-accent" /> Guide d'achat : Comment choisir ?</h2>
         
         <h3>1. Définissez votre budget</h3>
         <p>
@@ -273,7 +274,7 @@ const selectionCriteria = [
 
       <!-- FAQ -->
       <section id="faq" class="faq-section">
-        <h2>❓ Questions fréquentes</h2>
+        <h2><Icon name="help-circle" class="icon-accent" /> Questions fréquentes</h2>
         
         <div class="faq-item">
           <h3>Quel est le meilleur produit XYZ en {new Date().getFullYear()} ?</h3>
@@ -325,16 +326,18 @@ const selectionCriteria = [
           <div class="cta-buttons">
             <AffiliateButton 
               href={products[0].affiliateLink}
-              text="🏆 Voir le N°1"
+              text="Voir le N°1"
               variant="accent"
               size="large"
+              icon="trophy"
               track={products[0].name}
             />
             <AffiliateButton 
               href={products[1].affiliateLink}
-              text="💰 Voir le meilleur prix"
+              text="Voir le meilleur prix"
               variant="secondary"
               size="large"
+              icon="currency-euro"
               track={products[1].name}
             />
           </div>

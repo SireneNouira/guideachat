@@ -23,14 +23,15 @@ const { product, rank } = Astro.props;
 
 import AffiliateButton from './AffiliateButton.astro';
 import StarRating from './StarRating.astro';
+import Icon from './Icon.astro';
 ---
 
 <div class="comparison-card">
   {rank && rank <= 3 && (
     <div class="rank-badge rank-{rank}">
-      {rank === 1 && '🥇'}
-      {rank === 2 && '🥈'}
-      {rank === 3 && '🥉'}
+      {rank === 1 && <Icon name="trophy" class="icon-accent" size={18} />}
+      {rank === 2 && <Icon name="award" class="icon-accent" size={18} />}
+      {rank === 3 && <Icon name="medal" class="icon-accent" size={18} />}
       N°{rank}
     </div>
   )}
@@ -56,20 +57,20 @@ import StarRating from './StarRating.astro';
     
     <div class="pros-cons-mini">
       <div class="pros-mini">
-        <strong>✓ Points forts :</strong>
+        <strong><Icon name="check" class="icon-accent" size={16} /> Points forts :</strong>
         <ul>
           {product.pros.slice(0, 3).map(pro => (
-            <li>{pro}</li>
+            <li><Icon name="check" class="icon-accent" size={16} /> {pro}</li>
           ))}
         </ul>
       </div>
       
       {product.cons.length > 0 && (
         <div class="cons-mini">
-          <strong>✗ Points faibles :</strong>
+          <strong><Icon name="x" class="icon-muted" size={16} /> Points faibles :</strong>
           <ul>
             {product.cons.slice(0, 2).map(con => (
-              <li>{con}</li>
+              <li><Icon name="x" class="icon-muted" size={16} /> {con}</li>
             ))}
           </ul>
         </div>

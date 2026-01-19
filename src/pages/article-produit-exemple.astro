@@ -16,6 +16,7 @@ import AffiliateBox from '../components/AffiliateBox.astro';
 import ProsConsBox from '../components/ProsConsBox.astro';
 import ProductSpecs from '../components/ProductSpecs.astro';
 import StarRating from '../components/StarRating.astro';
+import Icon from '../components/Icon.astro';
 
 // ===== CONFIGURATION DU PRODUIT =====
 const productData = {
@@ -34,11 +35,11 @@ const productData = {
   affiliateLink: "https://votre-lien-affilie.com/produit-xyz",
   
   // Images
-  mainImage: "/images/products/produit-xyz-main.jpg",
+  mainImage: "/images/img4.jpg",
   galleryImages: [
-    "/images/products/produit-xyz-1.jpg",
-    "/images/products/produit-xyz-2.jpg",
-    "/images/products/produit-xyz-3.jpg"
+    "/images/img2.jpg",
+    "/images/img3.jpg",
+    "/images/img.jpg"
   ],
   
   // Note
@@ -98,9 +99,9 @@ const updateDate = "19 janvier 2026";
       </h1>
       
       <div class="article-meta">
-        <span class="meta-item">📅 Publié le {publishDate}</span>
-        <span class="meta-item">🔄 Mis à jour le {updateDate}</span>
-        <span class="meta-item">⏱️ Lecture : 8 min</span>
+        <span class="meta-item"><Icon name="calendar-event" class="icon-accent" /> Publié le {publishDate}</span>
+        <span class="meta-item"><Icon name="refresh" class="icon-accent" /> Mis à jour le {updateDate}</span>
+        <span class="meta-item"><Icon name="clock" class="icon-accent" /> Lecture : 8 min</span>
       </div>
       
       <!-- Note globale -->
@@ -113,7 +114,7 @@ const updateDate = "19 janvier 2026";
     <!-- Encart principal d'affiliation -->
     <div class="container">
       <AffiliateBox 
-        title="🏆 Meilleur rapport qualité-prix"
+        title="Meilleur rapport qualité-prix"
         productName={productData.name}
         price={productData.price}
         image={productData.mainImage}
@@ -146,7 +147,7 @@ const updateDate = "19 janvier 2026";
 
       <!-- Table des matières -->
       <nav class="table-of-contents">
-        <h2>📋 Sommaire</h2>
+        <h2><Icon name="clipboard-list" class="icon-accent" /> Sommaire</h2>
         <ol>
           <li><a href="#presentation">Présentation du produit</a></li>
           <li><a href="#caracteristiques">Caractéristiques techniques</a></li>
@@ -159,7 +160,7 @@ const updateDate = "19 janvier 2026";
 
       <!-- Section 1: Présentation -->
       <section id="presentation">
-        <h2>🎯 Présentation du {productData.name}</h2>
+        <h2><Icon name="target" class="icon-accent" /> Présentation du {productData.name}</h2>
         <p>
           Le <strong>{productData.name}</strong> de la marque {productData.brand} est un produit 
           qui s'adresse à tous ceux qui recherchent qualité et performance dans la catégorie {productData.category}.
@@ -173,9 +174,10 @@ const updateDate = "19 janvier 2026";
         <div class="cta-inline">
           <AffiliateButton 
             href={productData.affiliateLink}
-            text="👉 Voir le prix actuel"
+            text="Voir le prix actuel"
             variant="accent"
             size="large"
+            icon="arrow-right"
             track={productData.name}
           />
         </div>
@@ -183,7 +185,7 @@ const updateDate = "19 janvier 2026";
 
       <!-- Section 2: Caractéristiques -->
       <section id="caracteristiques">
-        <h2>📊 Caractéristiques techniques</h2>
+        <h2><Icon name="chart-bar" class="icon-accent" /> Caractéristiques techniques</h2>
         <p>
           Voici un récapitulatif complet des spécifications techniques du {productData.name} :
         </p>
@@ -192,7 +194,7 @@ const updateDate = "19 janvier 2026";
 
       <!-- Section 3: Test complet -->
       <section id="test">
-        <h2>🔍 Notre test complet</h2>
+        <h2><Icon name="search" class="icon-accent" /> Notre test complet</h2>
         
         <h3>Unboxing et première impression</h3>
         <p>
@@ -222,7 +224,7 @@ const updateDate = "19 janvier 2026";
 
       <!-- Section 4: Avantages/Inconvénients -->
       <section id="avantages-inconvenients">
-        <h2>⚖️ Avantages et inconvénients</h2>
+        <h2><Icon name="scale" class="icon-accent" /> Avantages et inconvénients</h2>
         <p>
           Après notre période de test, voici un résumé objectif des points forts et faibles du {productData.name} :
         </p>
@@ -234,7 +236,7 @@ const updateDate = "19 janvier 2026";
 
       <!-- Section 5: Avis final -->
       <section id="avis">
-        <h2>💭 Notre avis final</h2>
+        <h2><Icon name="message-circle-2" class="icon-accent" /> Notre avis final</h2>
         <div class="final-rating">
           <StarRating rating={productData.rating} size="large" />
         </div>
@@ -249,24 +251,24 @@ const updateDate = "19 janvier 2026";
         </p>
         
         <div class="recommendation-box">
-          <h3>👍 À qui s'adresse ce produit ?</h3>
+          <h3><Icon name="thumb-up" class="icon-accent" /> À qui s'adresse ce produit ?</h3>
           <ul>
-            <li>✅ Aux personnes recherchant un bon rapport qualité-prix</li>
-            <li>✅ Aux débutants comme aux utilisateurs expérimentés</li>
-            <li>✅ À ceux qui valorisent la qualité de fabrication</li>
+            <li><Icon name="check" class="icon-accent" /> Aux personnes recherchant un bon rapport qualité-prix</li>
+            <li><Icon name="check" class="icon-accent" /> Aux débutants comme aux utilisateurs expérimentés</li>
+            <li><Icon name="check" class="icon-accent" /> À ceux qui valorisent la qualité de fabrication</li>
           </ul>
           
-          <h3>👎 À qui ne convient-il pas ?</h3>
+          <h3><Icon name="thumb-down" class="icon-muted" /> À qui ne convient-il pas ?</h3>
           <ul>
-            <li>❌ Aux personnes cherchant un produit ultra-léger</li>
-            <li>❌ À ceux qui ont besoin d'une notice en français</li>
+            <li><Icon name="x" class="icon-muted" /> Aux personnes cherchant un produit ultra-léger</li>
+            <li><Icon name="x" class="icon-muted" /> À ceux qui ont besoin d'une notice en français</li>
           </ul>
         </div>
       </section>
 
       <!-- Section 6: Où acheter -->
       <section id="ou-acheter">
-        <h2>🛒 Où acheter le {productData.name} au meilleur prix ?</h2>
+        <h2><Icon name="shopping-cart" class="icon-accent" /> Où acheter le {productData.name} au meilleur prix ?</h2>
         <p>
           Après avoir comparé les prix sur plusieurs sites, nous vous recommandons cette offre 
           qui propose le meilleur tarif du moment :
@@ -286,10 +288,10 @@ const updateDate = "19 janvier 2026";
               <span class="discount">-25% de réduction</span>
             </div>
             <ul class="offer-benefits">
-              <li>✓ Livraison gratuite</li>
-              <li>✓ Retour sous 30 jours</li>
-              <li>✓ Garantie constructeur 2 ans</li>
-              <li>✓ Paiement sécurisé</li>
+              <li><Icon name="check" class="icon-accent" size={18} /> Livraison gratuite</li>
+              <li><Icon name="check" class="icon-accent" size={18} /> Retour sous 30 jours</li>
+              <li><Icon name="check" class="icon-accent" size={18} /> Garantie constructeur 2 ans</li>
+              <li><Icon name="check" class="icon-accent" size={18} /> Paiement sécurisé</li>
             </ul>
             <div class="price-cta">
               <AffiliateButton 
@@ -302,7 +304,7 @@ const updateDate = "19 janvier 2026";
             </div>
             <p class="affiliate-note">
               <small>
-                ℹ️ En tant que Partenaire, nous pouvons percevoir une commission sur les achats 
+                <Icon name="info-circle" class="icon-accent" size={16} /> En tant que Partenaire, nous pouvons percevoir une commission sur les achats 
                 effectués via ce lien, sans frais supplémentaires pour vous.
               </small>
             </p>
@@ -312,7 +314,7 @@ const updateDate = "19 janvier 2026";
 
       <!-- FAQ SEO -->
       <section class="faq-section">
-        <h2>❓ Questions fréquentes</h2>
+        <h2><Icon name="help-circle" class="icon-accent" /> Questions fréquentes</h2>
         
         <div class="faq-item">
           <h3>Le {productData.name} vaut-il son prix ?</h3>
@@ -344,9 +346,10 @@ const updateDate = "19 janvier 2026";
           <p>Profitez de l'offre actuelle avec -25% de réduction</p>
           <AffiliateButton 
             href={productData.affiliateLink}
-            text="🚀 Acheter maintenant au meilleur prix"
+            text="Acheter maintenant au meilleur prix"
             variant="accent"
             size="large"
+            icon="rocket"
             track={productData.name}
           />
         </div>

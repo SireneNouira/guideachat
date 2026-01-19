@@ -19,15 +19,23 @@ const {
 
 const percentage = (rating / maxRating) * 100;
 const sizeClass = `stars-${size}`;
+const stars = Array.from({ length: maxRating });
+const containerWidth = `calc(${maxRating} * var(--star-size) + ${(maxRating - 1)} * var(--star-gap))`;
+
+import Icon from './Icon.astro';
 ---
 
 <div class={`star-rating ${sizeClass}`}>
-  <div class="stars-container">
+  <div class="stars-container" style={`width: ${containerWidth};`} aria-hidden="true">
     <div class="stars-background">
-      {'★'.repeat(maxRating)}
+      {stars.map(() => (
+        <Icon name="star" class="star-icon icon-muted" />
+      ))}
     </div>
     <div class="stars-filled" style={`width: ${percentage}%`}>
-      {'★'.repeat(maxRating)}
+      {stars.map(() => (
+        <Icon name="star-filled" class="star-icon icon-accent" />
+      ))}
     </div>
   </div>
   {showNumber && (

@@ -1,0 +1,25 @@
+---
+import "iconify-icon";
+
+interface Props {
+  name: string;
+  size?: number | string;
+  label?: string;
+  class?: string;
+}
+
+const { name, size = 20, label, class: className = "" } = Astro.props;
+const iconName = name.includes(":") ? name : `tabler:${name}`;
+const ariaLabel = label ?? undefined;
+const ariaHidden = label ? "false" : "true";
+---
+
+<iconify-icon
+  icon={iconName}
+  width={size}
+  height={size}
+  role="img"
+  aria-label={ariaLabel}
+  aria-hidden={ariaHidden}
+  class={`ui-icon ${className}`.trim()}
+></iconify-icon>

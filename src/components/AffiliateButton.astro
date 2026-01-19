@@ -13,12 +13,14 @@ interface Props {
   track?: string; // Pour le tracking analytics
 }
 
+import Icon from './Icon.astro';
+
 const { 
   href, 
   text = "Voir l'offre", 
   variant = 'primary',
   size = 'normal',
-  icon = '→',
+  icon = 'arrow-right',
   external = true,
   track = ''
 } = Astro.props;
@@ -27,6 +29,7 @@ const variantClass = `btn-${variant}`;
 const sizeClass = size === 'large' ? 'btn-lg' : '';
 const relAttr = external ? 'noopener noreferrer nofollow' : '';
 const targetAttr = external ? '_blank' : '_self';
+
 ---
 
 <a 
@@ -37,5 +40,5 @@ const targetAttr = external ? '_blank' : '_self';
   data-track={track}
 >
   <span class="btn-text">{text}</span>
-  {icon && <span class="btn-icon">{icon}</span>}
+  {icon && <Icon name={icon} class="btn-icon icon-accent" size={18} />}
 </a>
