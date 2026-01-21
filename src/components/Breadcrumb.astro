@@ -1,0 +1,94 @@
+---
+export interface BreadcrumbItem {
+  label: string;
+  url?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const siteUrl = Astro.site?.href ?? 'https://sirenenouira.github.io/guideachat/';
+
+// Schema.org BreadcrumbList
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": items.map((item, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": item.label,
+    ...(item.url && { "item": `${siteUrl}${item.url.startsWith('/') ? item.url.slice(1) : item.url}` })
+  }))
+};
+---
+
+<nav aria-label="Fil d'Ariane" class="breadcrumb">
+  <ol class="breadcrumb-list">
+    {items.map((item, index) => (
+      <li class="breadcrumb-item">
+        {item.url ? (
+          <>
+            <a href={item.url}>{item.label}</a>
+            {index < items.length - 1 && <span class="breadcrumb-separator">/</span>}
+          </>
+        ) : (
+          <span aria-current="page">{item.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<style>
+  .breadcrumb {
+    margin: 1rem 0 2rem;
+    font-size: 0.875rem;
+  }
+
+  .breadcrumb-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .breadcrumb-item a {
+    color: #0066cc;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .breadcrumb-item a:hover {
+    color: #0052a3;
+    text-decoration: underline;
+  }
+
+  .breadcrumb-item span[aria-current="page"] {
+    color: #666;
+    font-weight: 500;
+  }
+
+  .breadcrumb-separator {
+    color: #999;
+    user-select: none;
+  }
+
+  @media (max-width: 768px) {
+    .breadcrumb {
+      font-size: 0.8rem;
+    }
+  }
+</style>

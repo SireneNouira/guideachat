@@ -1,0 +1,282 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const base = import.meta.env.BASE_URL;
+
+const categories = [
+  {
+    name: "Aspirateurs Balai",
+    slug: "aspirateurs-balai",
+    description: "Tests et comparatifs des meilleurs aspirateurs balai sans fil du marché",
+    icon: "mdi:vacuum",
+    count: 3,
+    image: "/images/categories/aspirateurs.jpg"
+  },
+  {
+    name: "Électroménager",
+    slug: "electromenager",
+    description: "Guide d'achat pour tous vos appareils électroménagers",
+    icon: "mdi:home-lightning-bolt",
+    count: 5,
+    image: "/images/categories/electromenager.jpg"
+  },
+  {
+    name: "High-Tech",
+    slug: "high-tech",
+    description: "Actualités et tests des derniers produits technologiques",
+    icon: "mdi:cellphone-wireless",
+    count: 8,
+    image: "/images/categories/hightech.jpg"
+  },
+  {
+    name: "Maison & Jardin",
+    slug: "maison-jardin",
+    description: "Équipements et outils pour votre maison et votre jardin",
+    icon: "mdi:home-variant",
+    count: 4,
+    image: "/images/categories/maison.jpg"
+  },
+  {
+    name: "Sport & Fitness",
+    slug: "sport-fitness",
+    description: "Matériel et équipements pour vos activités sportives",
+    icon: "mdi:dumbbell",
+    count: 6,
+    image: "/images/categories/sport.jpg"
+  },
+  {
+    name: "Cuisine",
+    slug: "cuisine",
+    description: "Ustensiles et robots de cuisine pour faciliter vos préparations",
+    icon: "mdi:chef-hat",
+    count: 7,
+    image: "/images/categories/cuisine.jpg"
+  }
+];
+---
+
+<Layout
+  title="Catégories"
+  description="Découvrez toutes nos catégories de produits testés et comparés pour vous aider à faire le bon choix"
+>
+  <div class="categories-page">
+    <div class="container">
+      <div class="page-header">
+        <h1>Toutes nos catégories</h1>
+        <p class="subtitle">Explorez nos guides d'achat et tests produits par catégorie</p>
+      </div>
+
+      <div class="categories-grid">
+        {categories.map((category) => (
+          <article class="category-card">
+            <a href={`${base}${category.slug}`} class="category-link">
+              <div class="category-icon">
+                <iconify-icon icon={category.icon} width="48" height="48"></iconify-icon>
+              </div>
+              <div class="category-content">
+                <h2>{category.name}</h2>
+                <p>{category.description}</p>
+                <div class="category-meta">
+                  <span class="article-count">{category.count} articles</span>
+                </div>
+              </div>
+              <div class="category-arrow">
+                <iconify-icon icon="mdi:arrow-right" width="24" height="24"></iconify-icon>
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+
+      <div class="cta-section">
+        <h2>Vous ne trouvez pas ce que vous cherchez ?</h2>
+        <p>N'hésitez pas à nous contacter pour suggérer de nouvelles catégories ou produits à tester.</p>
+        <a href={`${base}contact`} class="btn btn-primary">Nous contacter</a>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .categories-page {
+    padding: 4rem 0;
+    min-height: 70vh;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .page-header h1 {
+    font-size: 2.5rem;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .category-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .category-link {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .category-icon {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  .category-content {
+    flex: 1;
+  }
+
+  .category-content h2 {
+    font-size: 1.5rem;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+  }
+
+  .category-content p {
+    color: #666;
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .category-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .article-count {
+    font-size: 0.875rem;
+    color: #667eea;
+    font-weight: 600;
+  }
+
+  .category-arrow {
+    flex-shrink: 0;
+    color: #667eea;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .category-card:hover .category-arrow {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+
+  .cta-section {
+    text-align: center;
+    padding: 3rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    color: white;
+  }
+
+  .cta-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .cta-section p {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.875rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary {
+    background: white;
+    color: #667eea;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    .categories-page {
+      padding: 2rem 0;
+    }
+
+    .page-header h1 {
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+    }
+
+    .categories-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .category-link {
+      padding: 1.5rem;
+    }
+
+    .category-icon {
+      width: 48px;
+      height: 48px;
+    }
+
+    .category-content h2 {
+      font-size: 1.25rem;
+    }
+
+    .cta-section {
+      padding: 2rem 1.5rem;
+    }
+
+    .cta-section h2 {
+      font-size: 1.5rem;
+    }
+  }
+</style>

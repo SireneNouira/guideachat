@@ -1,3 +1,9 @@
+---
+layout: ../layouts/Layout.astro
+title: "Divulgation d'affiliation"
+description: "Transparence sur nos liens d'affiliation et notre politique de recommandation de produits"
+---
+
 # Divulgation d'Affiliation
 
 **Date de dernière mise à jour : 19 janvier 2026**

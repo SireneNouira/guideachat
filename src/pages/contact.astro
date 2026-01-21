@@ -1,0 +1,425 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout
+  title="Contact"
+  description="Contactez-nous pour toute question, suggestion ou partenariat"
+>
+  <div class="contact-page">
+    <div class="container">
+      <div class="page-header">
+        <h1>Contactez-nous</h1>
+        <p class="subtitle">Nous sommes à votre écoute pour répondre à toutes vos questions</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h2>Comment nous joindre</h2>
+          <p>Vous avez une question sur nos tests, une suggestion de produit à évaluer, ou une proposition de partenariat ?</p>
+          
+          <div class="contact-methods">
+            <div class="contact-method">
+              <div class="method-icon">
+                <iconify-icon icon="mdi:email" width="32" height="32"></iconify-icon>
+              </div>
+              <div class="method-content">
+                <h3>Email</h3>
+                <a href="mailto:topmschanel@gmail.com">topmschanel@gmail.com</a>
+                <p>Nous répondons sous 48h maximum</p>
+              </div>
+            </div>
+
+            <div class="contact-method">
+              <div class="method-icon">
+                <iconify-icon icon="mdi:clock-outline" width="32" height="32"></iconify-icon>
+              </div>
+              <div class="method-content">
+                <h3>Horaires</h3>
+                <p>Du lundi au vendredi</p>
+                <p>9h00 - 18h00 (heure de Paris)</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <h3>Questions fréquentes</h3>
+            <ul>
+              <li><strong>Tests de produits :</strong> Tous nos tests sont réalisés de manière indépendante</li>
+              <li><strong>Liens d'affiliation :</strong> Consultez notre <a href={`${base}divulgation-affiliation`}>page de divulgation</a></li>
+              <li><strong>Suggestions :</strong> Nous acceptons volontiers vos idées de produits à tester</li>
+              <li><strong>Partenariats :</strong> Pour les marques, écrivez-nous à topmschanel@gmail.com</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="contact-form-section">
+          <form class="contact-form" action="mailto:topmschanel@gmail.com" method="post" enctype="text/plain">
+            <h2>Envoyez-nous un message</h2>
+            
+            <div class="form-group">
+              <label for="name">Nom complet *</label>
+              <input type="text" id="name" name="name" required placeholder="Votre nom">
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" required placeholder="votre@email.com">
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Sujet *</label>
+              <select id="subject" name="subject" required>
+                <option value="">Choisissez un sujet</option>
+                <option value="question">Question sur un produit</option>
+                <option value="suggestion">Suggestion de test</option>
+                <option value="partenariat">Proposition de partenariat</option>
+                <option value="erreur">Signaler une erreur</option>
+                <option value="autre">Autre</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea id="message" name="message" required rows="6" placeholder="Votre message..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="checkbox-label">
+                <input type="checkbox" name="consent" required>
+                <span>J'accepte que mes données soient traitées conformément à la <a href={`${base}politique-confidentialite`}>politique de confidentialité</a> *</span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              <iconify-icon icon="mdi:send" width="20" height="20"></iconify-icon>
+              Envoyer le message
+            </button>
+
+            <p class="form-note">* Champs obligatoires</p>
+          </form>
+        </div>
+      </div>
+
+      <div class="additional-info">
+        <div class="info-cards">
+          <div class="info-card">
+            <iconify-icon icon="mdi:shield-check" width="48" height="48"></iconify-icon>
+            <h3>Confidentialité garantie</h3>
+            <p>Vos données personnelles sont protégées et ne seront jamais partagées avec des tiers</p>
+          </div>
+          
+          <div class="info-card">
+            <iconify-icon icon="mdi:reply-outline" width="48" height="48"></iconify-icon>
+            <h3>Réponse rapide</h3>
+            <p>Nous nous engageons à vous répondre dans les 48 heures ouvrées</p>
+          </div>
+          
+          <div class="info-card">
+            <iconify-icon icon="mdi:lightbulb-on-outline" width="48" height="48"></iconify-icon>
+            <h3>À votre écoute</h3>
+            <p>Vos suggestions nous aident à améliorer continuellement notre contenu</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .contact-page {
+    padding: 4rem 0;
+    min-height: 70vh;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .page-header h1 {
+    font-size: 2.5rem;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+  }
+
+  .contact-info h2 {
+    font-size: 1.75rem;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+  }
+
+  .contact-info > p {
+    color: #666;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .contact-method {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+  }
+
+  .method-icon {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  .method-content h3 {
+    font-size: 1.25rem;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+  }
+
+  .method-content a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .method-content a:hover {
+    text-decoration: underline;
+  }
+
+  .method-content p {
+    color: #666;
+    margin: 0.25rem 0;
+  }
+
+  .info-box {
+    padding: 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    color: white;
+  }
+
+  .info-box h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .info-box ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .info-box li {
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+
+  .info-box li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+
+  .info-box a {
+    color: white;
+    text-decoration: underline;
+  }
+
+  .contact-form-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .contact-form h2 {
+    font-size: 1.75rem;
+    color: #1a1a1a;
+    margin-bottom: 2rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #1a1a1a;
+    font-weight: 600;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.875rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    cursor: pointer;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    margin-top: 0.25rem;
+    width: auto;
+  }
+
+  .checkbox-label span {
+    font-weight: normal;
+    color: #666;
+  }
+
+  .checkbox-label a {
+    color: #667eea;
+    text-decoration: none;
+  }
+
+  .checkbox-label a:hover {
+    text-decoration: underline;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  }
+
+  .form-note {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: #666;
+    text-align: center;
+  }
+
+  .additional-info {
+    margin-top: 4rem;
+  }
+
+  .info-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .info-card {
+    text-align: center;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+  }
+
+  .info-card iconify-icon {
+    color: #667eea;
+    margin-bottom: 1rem;
+  }
+
+  .info-card h3 {
+    font-size: 1.25rem;
+    color: #1a1a1a;
+    margin-bottom: 0.75rem;
+  }
+
+  .info-card p {
+    color: #666;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 968px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .info-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .contact-page {
+      padding: 2rem 0;
+    }
+
+    .page-header h1 {
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+    }
+
+    .contact-form-section {
+      padding: 1.5rem;
+    }
+  }
+</style>

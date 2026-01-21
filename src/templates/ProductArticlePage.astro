@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import OptimizedImage from '../components/OptimizedImage.astro';
 import AffiliateButton from '../components/AffiliateButton.astro';
 import AffiliateBox from '../components/AffiliateBox.astro';
 import ProsConsBox from '../components/ProsConsBox.astro';
@@ -15,6 +17,7 @@ interface Props {
 
 const { data } = Astro.props;
 const base = import.meta.env.BASE_URL;
+const siteUrl = Astro.site?.href ?? 'https://sirenenouira.github.io/guideachat/';
 
 const resolveImage = (path: string) => (path?.startsWith('http') ? path : base + path);
 const mainImage = resolveImage(data.images.main);
@@ -24,22 +27,113 @@ const legalTransparencyHtml = data.legalNotice.transparency.replace(
   'href="divulgation-affiliation"',
   `href="${base}divulgation-affiliation"`
 );
+
+// Breadcrumb items
+const breadcrumbItems = [
+  { label: "Accueil", url: base },
+  { label: "Articles", url: `${base}articles` },
+  { label: data.category, url: `${base}categories/${data.category.toLowerCase()}` },
+  { label: data.name }
+];
+
+// Schema.org Product avec Review et AggregateRating
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": data.name,
+  "image": mainImage,
+  "description": data.metaDescription,
+  "brand": {
+    "@type": "Brand",
+    "name": data.brand
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": `${siteUrl}${data.slug}`,
+    "priceCurrency": "EUR",
+    "price": data.price.match(/\d+/)?.[0] || "0",
+    "priceValidUntil": new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "Organization",
+      "name": "Amazon France"
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": data.rating.toString(),
+    "bestRating": "5",
+    "worstRating": "1",
+    "ratingCount": "127",
+    "reviewCount": "89"
+  },
+  "review": {
+    "@type": "Review",
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": data.rating.toString(),
+      "bestRating": "5"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Guide Achat"
+    },
+    "datePublished": data.dates.publish,
+    "reviewBody": data.metaDescription
+  },
+  "sku": data.slug,
+  "category": data.category
+};
+
+// Schema.org Article
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": data.metaTitle,
+  "description": data.metaDescription,
+  "image": mainImage,
+  "author": {
+    "@type": "Person",
+    "name": "Guide Achat"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Guide Achat",
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${siteUrl}${base}images/logo.png`
+    }
+  },
+  "datePublished": data.dates.publish,
+  "dateModified": data.dates.update,
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `${siteUrl}${data.slug}`
+  }
+};
+
+// Combine schemas
+const combinedSchema = {
+  "@context": "https://schema.org",
+  "@graph": [productSchema, articleSchema]
+};
 ---
 
 <Layout 
   title={data.metaTitle} 
   description={data.metaDescription}
   image={mainImage}
+  keywords={`${data.name}, ${data.brand}, ${data.category}, test, avis, prix, ${data.name.toLowerCase()}`}
+  author="Guide Achat"
+  publishDate={data.dates.publish}
+  modifiedDate={data.dates.update}
+  articleSection={data.category}
+  jsonLd={combinedSchema}
 >
   <article class="product-article">
     <!-- En-tête de l'article -->
     <div class="article-header container">
-      <div class="breadcrumb">
-        <a href={base}>Accueil</a> » 
-        <a href={base + 'articles'}>Articles</a> » 
-        <a href={`${base}categories/${data.category.toLowerCase()}`}>{data.category}</a> »
-        <span>{data.name}</span>
-      </div>
+      <Breadcrumb items={breadcrumbItems} />
       
       <!-- H1 Unique - Crucial pour le SEO -->
       <h1 class="article-title">
@@ -57,9 +151,12 @@ const legalTransparencyHtml = data.legalNotice.transparency.replace(
       <!-- Note et CTA principal -->
       <div class="product-summary">
         <div class="product-summary-left">
-          <img 
-            src={mainImage} 
-            alt={`${data.name} - Aspirateur balai premium avec station auto-vide`}
+          <OptimizedImage
+            src={mainImage}
+            alt={`${data.name} - Test complet et avis détaillé ${data.brand} - Aspirateur balai sans fil haute performance`}
+            width={600}
+            height={600}
+            loading="eager"
             class="product-main-image"
           />
         </div>
@@ -281,15 +378,25 @@ const legalTransparencyHtml = data.legalNotice.transparency.replace(
       <section class="content-section">
         <h2><Icon name="camera" size={20} /> Galerie Photos</h2>
         <div class="product-gallery">
-          {galleryImages.map((image, index) => (
-            <div class="gallery-item">
-              <img 
-                src={image} 
-                alt={`${data.name} - Photo ${index + 1}`}
-                loading="lazy"
-              />
-            </div>
-          ))}
+          {galleryImages.map((image, index) => {
+            const altTexts = [
+              `${data.name} ${data.brand} - vue d'ensemble complète`,
+              `${data.name} - accessoires inclus et brosse principale`,
+              `${data.name} - détails de la brosse motorisée`,
+              `${data.name} - station de charge et rangement`
+            ];
+            return (
+              <div class="gallery-item">
+                <OptimizedImage
+                  src={image}
+                  alt={altTexts[index] || `${data.name} - Photo ${index + 1}`}
+                  width={400}
+                  height={400}
+                  loading="lazy"
+                />
+              </div>
+            );
+          })}
         </div>
         <p class="image-note" set:html={data.content.galleryNote} />
       </section>

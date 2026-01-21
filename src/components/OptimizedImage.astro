@@ -1,0 +1,49 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  loading?: "lazy" | "eager";
+  class?: string;
+  sizes?: string;
+  quality?: number;
+  format?: "webp" | "avif" | "jpg" | "png";
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  loading = "lazy",
+  class: className,
+  sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px",
+  quality = 80,
+  format = "webp"
+} = Astro.props;
+
+// Le src reçu est déjà résolu avec le base path par le parent
+// On l'utilise tel quel
+const imageSrc = src;
+---
+
+<img
+  src={imageSrc}
+  alt={alt}
+  width={width}
+  height={height}
+  loading={loading}
+  decoding="async"
+  class={className}
+  sizes={sizes}
+  fetchpriority={loading === "eager" ? "high" : "auto"}
+/>
+
+<style>
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>

@@ -1,0 +1,85 @@
+---
+export interface AnalyticsConfig {
+  measurementId: string;
+  enabled?: boolean;
+}
+
+interface Props {
+  measurementId?: string;
+  enabled?: boolean;
+}
+
+const { 
+  measurementId = "G-XXXXXXXXXX", // Remplacer par votre ID Google Analytics
+  enabled = true 
+} = Astro.props;
+
+// Ne pas charger en développement
+const isDev = import.meta.env.DEV;
+const shouldLoad = enabled && !isDev && measurementId !== "G-XXXXXXXXXX";
+---
+
+{shouldLoad && (
+  <>
+    <!-- Google Analytics 4 -->
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}></script>
+    <script is:inline define:vars={{ measurementId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', measurementId, {
+        'page_title': document.title,
+        'page_location': window.location.href,
+        'anonymize_ip': true, // RGPD-friendly
+        'cookie_flags': 'SameSite=None;Secure'
+      });
+
+      // Track external link clicks (liens d'affiliation)
+      document.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (link && link.href && link.hostname !== window.location.hostname) {
+          gtag('event', 'click', {
+            'event_category': 'outbound',
+            'event_label': link.href,
+            'transport_type': 'beacon'
+          });
+        }
+      });
+
+      // Track affiliate button clicks
+      document.addEventListener('click', (e) => {
+        const button = e.target.closest('[data-track]');
+        if (button) {
+          const trackingId = button.getAttribute('data-track');
+          gtag('event', 'affiliate_click', {
+            'event_category': 'affiliate',
+            'event_label': trackingId,
+            'value': 1
+          });
+        }
+      });
+
+      // Track scroll depth
+      let scrollTracked = false;
+      window.addEventListener('scroll', () => {
+        if (!scrollTracked) {
+          const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+          if (scrollPercent > 75) {
+            scrollTracked = true;
+            gtag('event', 'scroll_depth', {
+              'event_category': 'engagement',
+              'event_label': '75%',
+              'value': 75
+            });
+          }
+        }
+      });
+    </script>
+  </>
+)}
+
+{!shouldLoad && isDev && (
+  <script is:inline>
+    console.log('📊 Google Analytics désactivé en développement');
+  </script>
+)}
