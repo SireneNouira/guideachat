@@ -5,33 +5,9 @@ import Icon from '../components/Icon.astro';
 
 const base = import.meta.env.BASE_URL;
 
-const featuredArticles = [
-  {
-    title: "Test & Avis Produit Premium XYZ",
-    excerpt: "Notre test complet du produit le plus populaire de 2026",
-    image: base + "images/img.jpg",
-    category: "Électronique",
-    link: base + "article-produit-exemple",
-    rating: 4.8
-  },
-  {
-    title: "Top 5 des Meilleurs Produits XYZ",
-    excerpt: "Comparatif complet pour faire le bon choix",
-    image: base + "images/img2.jpg",
-    category: "Comparatifs",
-    link: base + "comparatif-exemple",
-    rating: 4.9
-  }
-];
+const featuredArticles = [];
 
-const categories = [
-  { name: "Électronique", icon: "device-laptop", count: 25, tag: "Tendance", color: "#1f8ef1", description: "Smartphones, laptops, audio et maison connectée" },
-  { name: "Maison & Jardin", icon: "home-2", count: 18, tag: "Nouveaux tests", color: "#16a085", description: "Robot aspirateurs, outils sans fil, déco durable" },
-  { name: "Sport & Fitness", icon: "dumbbell", count: 15, tag: "Performance", color: "#e67e22", description: "Montres GPS, cardio, home gym et récupération" },
-  { name: "Beauté & Santé", icon: "flower", count: 22, tag: "Soins", color: "#ff6b6b", description: "Dermocosmétique, bien-être, appareils de soin" },
-  { name: "Mode & Accessoires", icon: "shirt", count: 12, tag: "Style", color: "#0f172a", description: "Sacs, sneakers, techwear et montres urbaines" },
-  { name: "Cuisine", icon: "chef-hat", count: 20, tag: "Indispensable", color: "#27ae60", description: "Robots, café, cuisson lente et batch cooking" }
-];
+const categories = [];
 ---
 
 <Layout 
@@ -82,31 +58,14 @@ const categories = [
     <div class="container">
       <div class="section-header">
         <div>
-          <p class="section-kicker">À lire maintenant</p>
-          <h2 class="section-title"><Icon name="map-pin" class="icon-accent" /> Articles en vedette</h2>
+          <p class="section-kicker">Bientôt disponible</p>
+          <h2 class="section-title"><Icon name="map-pin" class="icon-accent" /> Articles en cours de création</h2>
         </div>
-        <a href={base + "articles"} class="btn btn-ghost btn-sm" aria-label="Voir tous les articles">Tout voir</a>
       </div>
       
-      <div class="articles-grid">
-        {featuredArticles.map(article => (
-          <article class="article-card">
-            <div class="card-image-wrapper">
-              <img src={article.image} alt={article.title} />
-              <span class="category-badge">{article.category}</span>
-            </div>
-            <div class="card-content">
-              <h3 class="card-title">
-                <a href={article.link}>{article.title}</a>
-              </h3>
-              <p class="card-excerpt">{article.excerpt}</p>
-              <div class="card-footer">
-                <span class="rating"><Icon name="star" class="icon-accent" size={18} /> {article.rating}/5</span>
-                <a href={article.link} class="read-more">Lire la suite <Icon name="arrow-right" class="icon-accent" size={16} /></a>
-              </div>
-            </div>
-          </article>
-        ))}
+      <div style="text-align: center; padding: 4rem 2rem; background: var(--color-surface); border-radius: 12px; margin-top: 2rem;">
+        <Icon name="clock" class="icon-accent" size={48} />
+        <p style="margin-top: 1rem; font-size: 1.125rem; color: var(--color-text-secondary);">Nos premiers tests et comparatifs seront bientôt disponibles. Revenez nous voir prochainement !</p>
       </div>
     </div>
   </section>
@@ -120,40 +79,9 @@ const categories = [
         <div class="section-header">
           <div>
             <p class="section-kicker">Navigation rapide</p>
-            <h2 class="section-title"><Icon name="folders" class="icon-accent" /> Parcourir par catégorie</h2>
-            <p class="section-subtitle">Accédez directement aux dossiers les plus consultés, mis à jour avec nos derniers tests et comparatifs.</p>
+            <h2 class="section-title"><Icon name="folders" class="icon-accent" /> Catégories à venir</h2>
+            <p class="section-subtitle">Les catégories seront disponibles dès la publication de nos premiers contenus.</p>
           </div>
-          <span class="badge">+ de 100 guides</span>
-        </div>
-
-        <div class="categories-toolbar" aria-label="Filtres rapides">
-          <span class="chip chip-ghost">Guides d'achat</span>
-          <span class="chip chip-ghost">Comparatifs</span>
-          <span class="chip chip-ghost">Promos suivies</span>
-          <span class="chip chip-ghost">Mises à jour 2026</span>
-        </div>
-      
-        <div class="categories-grid">
-          {categories.map(category => (
-            <a
-              href={`${base}categories/${category.name.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`}
-              class="category-card"
-              style={`--category-color: ${category.color}`}
-            >
-              <div class="category-card__top">
-                <Icon name={category.icon} class="category-icon icon-accent" size={24} />
-                <span class="category-tag">{category.tag}</span>
-              </div>
-              <div class="category-card__body">
-                <h3 class="category-name">{category.name}</h3>
-                <p class="category-description">{category.description}</p>
-              </div>
-              <div class="category-card__meta">
-                <span class="category-count">{category.count} articles</span>
-                <span class="category-arrow" aria-hidden="true"><Icon name="arrow-right" size={16} /></span>
-              </div>
-            </a>
-          ))}
         </div>
       </div>
     </div>
@@ -182,9 +110,9 @@ const categories = [
         <div class="cta-text">
           <p class="section-kicker">Passez à l'action</p>
           <h2 id="cta-title">Prêt à découvrir nos recommandations ?</h2>
-          <p class="lead">Rejoignez des milliers de lecteurs qui font les bons choix grâce à nos guides et comparatifs rédigés par des testeurs exigeants.</p>
+          <p class="lead">Rejoignez-nous pour découvrir prochainement nos guides et comparatifs rédigés par des testeurs exigeants.</p>
           <ul class="cta-points" aria-label="Pourquoi nous suivre">
-            <li><Icon name="check" class="icon-accent" /> Guides mis à jour chaque mois</li>
+            <li><Icon name="check" class="icon-accent" /> Guides mis à jour régulièrement</li>
             <li><Icon name="check" class="icon-accent" /> Sélection triée par usage et budget</li>
             <li><Icon name="check" class="icon-accent" /> Liens d'affiliation transparents et signalés</li>
           </ul>
@@ -205,18 +133,14 @@ const categories = [
             />
           </div>
         </div>
-        <div class="cta-aside" aria-label="Chiffres clés">
+        <div class="cta-aside" aria-label="Lancement prochain">
           <div class="cta-stat">
-            <span class="stat-number">120+</span>
-            <span class="stat-label">Guides détaillés</span>
-          </div>
-          <div class="cta-stat">
-            <span class="stat-number">4.8/5</span>
-            <span class="stat-label">Note moyenne lecteurs</span>
+            <span class="stat-number">Bientôt</span>
+            <span class="stat-label">En préparation</span>
           </div>
           <div class="cta-quote">
-            <p>“Des recommandations claires, et des liens clairement indiqués. Un gain de temps énorme.”</p>
-            <span class="quote-author">— Lectrice fidèle</span>
+            <p>"Nos premiers contenus de qualité arrivent prochainement. Restez connectés !"</p>
+            <span class="quote-author">— L'équipe</span>
           </div>
         </div>
       </div>

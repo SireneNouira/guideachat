@@ -5,17 +5,17 @@ import Icon from "../components/Icon.astro";
 
 const base = import.meta.env.BASE_URL;
 
-const lastUpdate = "19 janvier 2026";
+const lastUpdate = "21 janvier 2026";
 
 const categories = [];
 
-const articles = [];
+const comparatifs = [];
 ---
 
 <Layout
-  title="Tous nos articles 2026"
-  description="Parcourez tous nos tests produits, comparatifs et guides d'achat. Sélection mise à jour en 2026 pour choisir en toute confiance."
-  canonicalUrl={base + "articles"}
+  title="Tous nos comparatifs 2026"
+  description="Découvrez nos comparatifs détaillés pour choisir le meilleur produit. Analyses approfondies et recommandations objectives."
+  canonicalUrl={base + "comparatifs"}
 >
   <article class="page-shell">
 
@@ -24,15 +24,15 @@ const articles = [];
         <div>
           <p class="section-kicker">Contenu à venir</p>
           <h2 class="section-title">
-            <Icon name="star" class="icon-accent" /> Articles en cours de création
+            <Icon name="chart-bar" class="icon-accent" /> Comparatifs en cours de création
           </h2>
-          <p class="section-subtitle">De nombreux tests et comparatifs sont en cours de rédaction. Revenez bientôt pour découvrir nos premiers contenus !</p>
+          <p class="section-subtitle">Les comparatifs arriveront bientôt, dès que suffisamment d'articles seront disponibles pour proposer des comparaisons pertinentes.</p>
         </div>
       </div>
 
       <div style="text-align: center; padding: 4rem 2rem; background: var(--color-surface); border-radius: 12px; margin-top: 2rem;">
         <Icon name="clock" class="icon-accent" size={48} />
-        <p style="margin-top: 1rem; font-size: 1.125rem; color: var(--color-text-secondary);">Nos équipes travaillent actuellement sur de nouveaux articles de qualité.</p>
+        <p style="margin-top: 1rem; font-size: 1.125rem; color: var(--color-text-secondary);">Nos équipes préparent des comparatifs détaillés qui seront publiés après la mise en ligne des premiers tests produits.</p>
       </div>
     </section>
 
@@ -42,18 +42,18 @@ const articles = [];
           <div>
             <p class="section-kicker">Catégories</p>
             <h2 class="section-title"><Icon name="folders" class="icon-accent" /> Parcourir par thème</h2>
-            <p class="section-subtitle">Les catégories seront disponibles dès la publication des premiers articles.</p>
+            <p class="section-subtitle">Les catégories de comparatifs seront disponibles dès la publication des premiers contenus.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="liste-articles" class="page-section">
+    <section id="liste-comparatifs" class="page-section">
       <div class="section-header">
         <div>
-          <p class="section-kicker">Tous les contenus</p>
+          <p class="section-kicker">Tous les comparatifs</p>
           <h2 class="section-title"><Icon name="list" class="icon-accent" /> Liste complète</h2>
-          <p class="section-subtitle">Cette section sera remplie au fur et à mesure de la publication de nos articles.</p>
+          <p class="section-subtitle">Cette section affichera tous nos comparatifs une fois les tests produits publiés.</p>
         </div>
       </div>
     </section>
